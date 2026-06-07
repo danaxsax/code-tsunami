@@ -1,9 +1,12 @@
 import HelloAvatar from '../components/HelloAvatar.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 import cocacolaLogo from '../../assets/cocacola-logo.png'
 import bokadosLogo from '../../assets/bokados-logo.png'
 import tetrapack from '../../assets/tetrapack.png'
 
 export default function Inicio({ onAvatarClick }) {
+  const { storeName } = useAuth()
+
   return (
     <>
       <HelloAvatar
@@ -19,7 +22,7 @@ export default function Inicio({ onAvatarClick }) {
       <div className="pos-bar">
         <div>
           <div className="pos-label">Punto de venta</div>
-          <div className="pos-name">Abarrotes Chabelita</div>
+          <div className="pos-name">{storeName}</div>
           <div className="pos-addr">Mar Ártico no.201, maza…</div>
         </div>
         <div className="pos-actions">

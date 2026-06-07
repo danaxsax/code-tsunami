@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import HelloAvatar from '../components/HelloAvatar.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 import pedidoIcon from '../../assets/pedido.png'
 import ticketIcon from '../../assets/ticket.png'
 import comboIcon from '../../assets/combo.png'
@@ -481,6 +482,7 @@ function buildGoalPath(selectedGoal, profile) {
 }
 
 export default function MiMeta({ onAvatarClick }) {
+  const { storeName } = useAuth()
   const [accepted, setAccepted] = useState(['Combo inteligente'])
   const [feedback, setFeedback] = useState('')
   const [feedbackType, setFeedbackType] = useState(null) // 'positive' or 'negative'
@@ -513,7 +515,15 @@ export default function MiMeta({ onAvatarClick }) {
     completedSocialCount,
     profile,
   })
-  const competition = clusterRankings[profile.perfil] || clusterRankings.Recurrente
+  const competition = (() => {
+    const base = clusterRankings[profile.perfil] || clusterRankings.Recurrente
+    return {
+      ...base,
+      ranking: base.ranking.map((item) =>
+        item.me ? { ...item, store: storeName } : item
+      ),
+    }
+  })()
   const myPosition = competition.ranking.findIndex((item) => item.me) + 1
 
   function toggleRecommendation(tag) {

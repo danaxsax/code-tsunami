@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { AuthProvider, useAuth } from './context/AuthContext.jsx'
 import Header from './components/Header.jsx'
 import TabBar from './components/TabBar.jsx'
 import Inicio from './pages/Inicio.jsx'
@@ -8,9 +9,13 @@ import Gana from './pages/Gana.jsx'
 import MiMeta from './pages/MiMeta.jsx'
 import Pedidos from './pages/Pedidos.jsx'
 import Ai from './pages/Ai.jsx'
+import Login from './pages/Login.jsx'
 
-export default function App() {
+function AppContent() {
   const [activeTab, setActiveTab] = useState('inicio')
+  const { isLoggedIn } = useAuth()
+
+  if (!isLoggedIn) return <Login />
 
   const panels = {
     inicio: Inicio,
@@ -39,5 +44,13 @@ export default function App() {
 
       <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
     </div>
+  )
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   )
 }
