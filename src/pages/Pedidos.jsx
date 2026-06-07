@@ -40,9 +40,51 @@ const orders = [
 
 export default function Pedidos({ onAvatarClick }) {
   const [activeFilter, setActiveFilter] = useState('Todos')
+  const [showEvalOverlay, setShowEvalOverlay] = useState(false)
+  const [selectedOrder, setSelectedOrder] = useState(null)
+  const [evalData, setEvalData] = useState({
+    generalRating: 0,
+    onTime: null,
+    appRating: 0,
+    condition: '',
+    comments: '',
+    aiUseful: null,
+    aiSatisfaction: 0,
+    aiComments: '',
+  })
+
+  function openEvaluation(order) {
+    setSelectedOrder(order)
+    setShowEvalOverlay(true)
+    setEvalData({
+      generalRating: 0,
+      onTime: null,
+      appRating: 0,
+      condition: '',
+      comments: '',
+      aiUseful: null,
+      aiSatisfaction: 0,
+      aiComments: '',
+    })
+  }
+
+  function handleEvalSubmit() {
+    // Simulate submission
+    console.log('Eval submitted:', evalData)
+    setShowEvalOverlay(false)
+    alert(`¡Gracias por evaluar el pedido ${selectedOrder.id}! Tu feedback nos ayuda a mejorar.`)
+  }
+
+  const filteredOrders = orders.filter((o) => {
+    if (activeFilter === 'Todos') return true
+    if (activeFilter === 'Activos') return o.status === 'En camino'
+    if (activeFilter === 'Entregados') return o.status === 'Entregado'
+    if (activeFilter === 'Cancelados') return o.status === 'Cancelado'
+    return true
+  })
 
   return (
-    <div className="panel-pad">
+    <div className="panel-pad" style={{ paddingBottom: '40px' }}>
       <HelloAvatar
         onClick={onAvatarClick}
         phrases={[
@@ -77,10 +119,10 @@ export default function Pedidos({ onAvatarClick }) {
 
       <div className="pedidos-month">
         <span>Junio 2026</span>
-        <span>5 Pedidos</span>
+        <span>{filteredOrders.length} Pedidos</span>
       </div>
 
-      {orders.map((order) => (
+      {filteredOrders.map((order) => (
         <div className="order-card" key={order.id}>
           <div className="order-top">
             <div>
@@ -97,14 +139,160 @@ export default function Pedidos({ onAvatarClick }) {
               <div className="order-date">Pedido el {order.date}</div>
             </div>
           </div>
-          <div className="order-foot">
-            <span className="order-status" style={{ color: order.statusColor }}>
-              {order.statusIcon} {order.status}
-            </span>
-            <span className="link">Ver detalle &rsaquo;</span>
+          <div className="order-foot" style={{ flexDirection: 'column', alignItems: 'stretch', gap: '10px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span className="order-status" style={{ color: order.statusColor }}>
+                {order.statusIcon} {order.status}
+              </span>
+              <span className="link">Ver detalle &rsaquo;</span>
+            </div>
+            {order.status === 'Entregado' && (
+              <button className="eval-btn" onClick={() => openEvaluation(order)}>
+                &#11088; Evaluar servicio
+              </button>
+            )}
           </div>
         </div>
       ))}
+
+      {showEvalOverlay && selectedOrder && (
+        <div className="tiktok-feed-overlay" role="dialog" aria-modal="true">
+          <div className="tiktok-feed-shell upload-shell" style={{ height: 'auto', maxHeight: '90vh', overflowY: 'auto' }}>
+            <div className="tiktok-feed-header">
+              <div>
+                <span>Encuesta de Satisfacción</span>
+                <strong>Pedido {selectedOrder.id}</strong>
+              </div>
+              <button onClick={() => setShowEvalOverlay(false)}>X</button>
+            </div>
+
+            <div className="eval-content" style={{ padding: '20px', textAlign: 'left' }}>
+              <div className="eval-group">
+                <label>¿Cómo evalúas la llegada de tu pedido?</label>
+                <div className="star-rating">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <button
+                      key={s}
+                      className={evalData.generalRating >= s ? 'active' : ''}
+                      onClick={() => setEvalData({ ...evalData, generalRating: s })}
+                    >
+                      ★
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="eval-group">
+                <label>¿Se te entregó a tiempo?</label>
+                <div className="bool-options">
+                  <button
+                    className={evalData.onTime === true ? 'active' : ''}
+                    onClick={() => setEvalData({ ...evalData, onTime: true })}
+                  >
+                    Sí
+                  </button>
+                  <button
+                    className={evalData.onTime === false ? 'active' : ''}
+                    onClick={() => setEvalData({ ...evalData, onTime: false })}
+                  >
+                    No
+                  </button>
+                </div>
+              </div>
+
+              <div className="eval-group">
+                <label>¿Cómo evalúas el proceso de compra en la App?</label>
+                <div className="star-rating">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <button
+                      key={s}
+                      className={evalData.appRating >= s ? 'active' : ''}
+                      onClick={() => setEvalData({ ...evalData, appRating: s })}
+                    >
+                      ★
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="eval-group">
+                <label>Condición de los productos</label>
+                <select
+                  value={evalData.condition}
+                  onChange={(e) => setEvalData({ ...evalData, condition: e.target.value })}
+                  style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--border)' }}
+                >
+                  <option value="">Selecciona una opción</option>
+                  <option value="Excelente">Excelente estado</option>
+                  <option value="Bueno">Buen estado</option>
+                  <option value="Dañado">Algunos empaques dañados</option>
+                  <option value="Equivocado">Productos equivocados</option>
+                  <option value="Faltante">Faltó producto</option>
+                </select>
+              </div>
+
+              <div className="eval-group">
+                <label>Comentarios adicionales</label>
+                <textarea
+                  rows="3"
+                  placeholder="Cuéntanos más sobre tu experiencia..."
+                  value={evalData.comments}
+                  onChange={(e) => setEvalData({ ...evalData, comments: e.target.value })}
+                  style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--border)', resize: 'none' }}
+                />
+              </div>
+
+              <div className="eval-group" style={{ borderTop: '1px solid #eee', paddingTop: '20px' }}>
+                <label>¿Te fue útil el agente IA Ali para este pedido?</label>
+                <div className="bool-options">
+                  <button
+                    className={evalData.aiUseful === true ? 'active' : ''}
+                    onClick={() => setEvalData({ ...evalData, aiUseful: true })}
+                  >
+                    Sí, mucho
+                  </button>
+                  <button
+                    className={evalData.aiUseful === false ? 'active' : ''}
+                    onClick={() => setEvalData({ ...evalData, aiUseful: false })}
+                  >
+                    No realmente
+                  </button>
+                </div>
+                {evalData.aiUseful === false && (
+                  <div className="feedback-comment-area" style={{ marginTop: '12px' }}>
+                    <textarea
+                      rows="2"
+                      placeholder="¿Qué podemos mejorar del agente Ali?"
+                      value={evalData.aiComments}
+                      onChange={(e) => setEvalData({ ...evalData, aiComments: e.target.value })}
+                      style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--border)', resize: 'none' }}
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="eval-group">
+                <label>Satisfacción general con el agente Ali</label>
+                <div className="star-rating">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <button
+                      key={s}
+                      className={evalData.aiSatisfaction >= s ? 'active' : ''}
+                      onClick={() => setEvalData({ ...evalData, aiSatisfaction: s })}
+                    >
+                      ★
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <button className="upload-submit-btn" style={{ width: '100%', marginTop: '10px' }} onClick={handleEvalSubmit}>
+                Enviar Evaluación
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
