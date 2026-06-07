@@ -108,6 +108,41 @@ const socialMissionSeed = [
   },
 ]
 
+const tiktokParticipants = [
+  {
+    store: 'Abarrotes Lupita',
+    cluster: 'VIP',
+    points: '+120 pts',
+    caption: 'Combo Coca-Cola + botana listo para el recreo',
+    handle: '@abarroteslupita',
+    url: 'https://vt.tiktok.com/ZSQ2RbeEm/',
+  },
+  {
+    store: 'Mini Super El Sol',
+    cluster: 'VIP',
+    points: '+120 pts',
+    caption: 'Promocion de combo estrella en mostrador',
+    handle: '@minisuperelsol',
+    url: 'https://vt.tiktok.com/ZSQ2RpNha/',
+  },
+  {
+    store: 'Tienda Aurora',
+    cluster: 'Nicho',
+    points: '+90 pts',
+    caption: 'Nuevo surtido para clientes de la tarde',
+    handle: '@tiendaaurora',
+    url: 'https://vt.tiktok.com/ZSQ2RUYhh/',
+  },
+  {
+    store: 'Miscelanea La 20',
+    cluster: 'Recurrente',
+    points: '+80 pts',
+    caption: 'Exhibidor completo y combo recomendado',
+    handle: '@miscelanea20',
+    url: 'https://vt.tiktok.com/ZSQ2RCU8k/',
+  },
+]
+
 const clusterRankings = {
   VIP: {
     challenge: 'Reto VIP: sube tu ticket promedio 10%',
@@ -218,7 +253,7 @@ function buildGoalPlan(profile) {
     'tu producto principal'
   const comboProducts = related.combo?.datos_asociados?.productos_frecuentes?.map(normalizeText) || [topSku, 'producto complementario']
   const ticket = Number(metricas.ticket_promedio) || 0
-  const targetTicket = Math.max(ticket * 1.1, ticket + 250)
+  const targetTicket = ticket ? ticket * 1.1 : 250
   const frequency = related.frequency?.datos_asociados?.frecuencia_actual || metricas.frecuencia || 1
   const targetFrequency = related.frequency?.datos_asociados?.target_frecuencia || Number(frequency) + 1
   const categories = related.diversification?.datos_asociados?.categorias_actuales || 2
@@ -294,6 +329,7 @@ export default function MiMeta({ onAvatarClick }) {
   const [accepted, setAccepted] = useState(['Combo inteligente'])
   const [feedback, setFeedback] = useState('')
   const [socialMissions, setSocialMissions] = useState(socialMissionSeed)
+  const [showTikTokFeed, setShowTikTokFeed] = useState(false)
   const [customGoals, setCustomGoals] = useState([])
   const [customDraft, setCustomDraft] = useState({
     type: 'Subir ticket promedio',
@@ -365,59 +401,16 @@ export default function MiMeta({ onAvatarClick }) {
     )
   }
 
+  function handleSocialMissionClick(id) {
+    advanceSocialMission(id)
+    if (id === 'tiktok-combo') {
+      setShowTikTokFeed(true)
+    }
+  }
+
   return (
     <div className="panel-pad goal-screen">
       <HelloAvatar onClick={onAvatarClick} />
-
-      <section className="goal-hero" style={{ '--goal-color': goal.color }}>
-        <div className="goal-hero-top">
-          <div>
-            <span className="goal-kicker">Mi Meta</span>
-            <h2>Abarrotes Chabelita</h2>
-            <p>Sesion activa: {profile.customer_id}</p>
-          </div>
-          <button className="goal-ai-pill" onClick={onAvatarClick}>
-            IA
-          </button>
-        </div>
-
-        <div className="goal-path">
-          <div className="goal-node done">1</div>
-          <div className="goal-path-line"><span style={{ width: `${goal.progress}%` }} /></div>
-          <div className="goal-node active">2</div>
-          <div className="goal-path-line muted"><span style={{ width: '18%' }} /></div>
-          <div className="goal-node">3</div>
-        </div>
-
-        <div className="goal-hero-bottom">
-          <span>Meta definida por el perfil</span>
-          <strong>{goal.title}</strong>
-        </div>
-      </section>
-
-      <section className="profile-summary-card">
-        <div className="profile-summary-top">
-          <span className="goal-chip-icon" style={{ '--goal-color': goal.color }}>{goal.icon}</span>
-          <div>
-            <h2>Cliente {profile.perfil}</h2>
-            <p>{profileCopy[profile.perfil] || 'El agente personaliza metas con el historial de compra.'}</p>
-          </div>
-        </div>
-        <div className="profile-metrics">
-          <div>
-            <span>Pais</span>
-            <strong>{normalizeText(profile.pais)}</strong>
-          </div>
-          <div>
-            <span>Frecuencia</span>
-            <strong>{profile.metricas_base.frecuencia}</strong>
-          </div>
-          <div>
-            <span>Ticket</span>
-            <strong>{money(profile.metricas_base.ticket_promedio)}</strong>
-          </div>
-        </div>
-      </section>
 
       <section className="goal-card active-goal-card" style={{ '--goal-color': goal.color }}>
         <div className="goal-card-title">
@@ -447,6 +440,24 @@ export default function MiMeta({ onAvatarClick }) {
         </div>
       </section>
 
+      <section className="goal-impact">
+        <div>
+          <span>Impacto</span>
+          <strong>{goal.impactValue}</strong>
+          <small>{goal.impactLabel}</small>
+        </div>
+        <div>
+          <span>Aceptadas</span>
+          <strong>{accepted.length} de 3</strong>
+          <small>misiones</small>
+        </div>
+        <div>
+          <span>Puntos</span>
+          <strong>{goal.points}</strong>
+          <small>estimados</small>
+        </div>
+      </section>
+
       <section className="generated-goals">
         <div className="goal-section-head">
           <div>
@@ -470,28 +481,10 @@ export default function MiMeta({ onAvatarClick }) {
         </div>
       </section>
 
-      <section className="goal-impact">
-        <div>
-          <span>Impacto</span>
-          <strong>{goal.impactValue}</strong>
-          <small>{goal.impactLabel}</small>
-        </div>
-        <div>
-          <span>Aceptadas</span>
-          <strong>{accepted.length} de 3</strong>
-          <small>misiones</small>
-        </div>
-        <div>
-          <span>Puntos</span>
-          <strong>{goal.points}</strong>
-          <small>estimados</small>
-        </div>
-      </section>
-
       <section className="missions-section">
         <div className="goal-section-head">
           <div>
-            <h2>Misiones recomendadas</h2>
+            <h2>Metas recomendadas</h2>
             <p>Acciones calculadas desde su perfil y metas.</p>
           </div>
           <span className="goal-streak">4 dias</span>
@@ -602,18 +595,47 @@ export default function MiMeta({ onAvatarClick }) {
           </div>
         </div>
         {socialMissions.map((mission) => (
-          <article className={`social-mission ${mission.status.replace(' ', '-')}`} key={mission.id}>
-            <div>
-              <div className="social-mission-top">
-                <span>{mission.reward}</span>
-                <small>{mission.time}</small>
+          <article className={`social-mission ${mission.status.replace(' ', '-')} ${mission.id === 'tiktok-combo' ? 'tiktok-feature' : ''}`} key={mission.id}>
+            <div className="social-mission-main">
+              <div>
+                <div className="social-mission-top">
+                  <span>{mission.reward}</span>
+                  <small>{mission.time}</small>
+                </div>
+                <h3>{mission.title}</h3>
+                <p>{mission.reason}</p>
               </div>
-              <h3>{mission.title}</h3>
-              <p>{mission.reason}</p>
+              <button onClick={() => handleSocialMissionClick(mission.id)}>
+                {mission.status === 'completada' ? 'Lista' : mission.status === 'en progreso' ? 'Completar' : 'Participar'}
+              </button>
             </div>
-            <button onClick={() => advanceSocialMission(mission.id)}>
-              {mission.status === 'completada' ? 'Lista' : mission.status === 'en progreso' ? 'Completar' : 'Participar'}
-            </button>
+
+            {mission.id === 'tiktok-combo' && (
+              <div className="tiktok-participants">
+                <div className="tiktok-participants-head">
+                  <strong>Participantes del reto</strong>
+                  <span>{tiktokParticipants.length} videos</span>
+                </div>
+                <div className="tiktok-list">
+                  {tiktokParticipants.map((participant) => (
+                    <a
+                      className="tiktok-card"
+                      href={participant.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      key={participant.url}
+                    >
+                      <span className="tiktok-play">▶</span>
+                      <div>
+                        <strong>{participant.store}</strong>
+                        <small>{participant.cluster} · {participant.points}</small>
+                      </div>
+                      <b>Ver</b>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
           </article>
         ))}
       </section>
@@ -672,6 +694,55 @@ export default function MiMeta({ onAvatarClick }) {
           <button>Ver reto del cluster</button>
         </div>
       </section>
+
+      {showTikTokFeed && (
+        <div className="tiktok-feed-overlay" role="dialog" aria-modal="true" aria-label="Participantes del reto TikTok">
+          <div className="tiktok-feed-shell">
+            <div className="tiktok-feed-header">
+              <div>
+                <span>Reto social</span>
+                <strong>Combo estrella</strong>
+              </div>
+              <button onClick={() => setShowTikTokFeed(false)} aria-label="Cerrar feed">
+                X
+              </button>
+            </div>
+
+            <div className="tiktok-feed">
+              {tiktokParticipants.map((participant, index) => (
+                <article className="tiktok-slide" key={participant.url} style={{ '--slide-index': index + 1 }}>
+                  <div className="tiktok-mock-top">
+                    <span>Siguiendo</span>
+                    <strong>Para ti</strong>
+                  </div>
+                  <div className="tiktok-slide-bg">
+                    <div className="tiktok-thumbnail">
+                      <span className="tiktok-thumbnail-label">Tuali Challenge</span>
+                      <strong>{participant.store}</strong>
+                      <small>{participant.caption}</small>
+                    </div>
+                    <span className="tiktok-slide-play" aria-hidden="true" />
+                  </div>
+                  <div className="tiktok-side-actions">
+                    <span>♥</span>
+                    <small>{12 + index * 8}k</small>
+                    <span>↗</span>
+                    <small>{participant.points}</small>
+                  </div>
+                  <div className="tiktok-slide-copy">
+                    <span>Video {index + 1} de {tiktokParticipants.length}</span>
+                    <h3>{participant.store}</h3>
+                    <p>{participant.handle} · {participant.cluster} · {participant.caption}</p>
+                    <a href={participant.url} target="_blank" rel="noreferrer">
+                      Ver TikTok
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       <section className="feedback-card">
         <div>
