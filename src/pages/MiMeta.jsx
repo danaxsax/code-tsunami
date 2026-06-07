@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import HelloAvatar from '../components/HelloAvatar.jsx'
 import pedidoIcon from '../../assets/pedido.png'
+import ticketIcon from '../../assets/ticket.png'
 import comboIcon from '../../assets/combo.png'
 import metaIcon from '../../assets/meta.png'
 import socialIcon from '../../assets/social.png'
@@ -27,30 +28,35 @@ const DEFAULT_PROFILE_FILE = '1_0012Eplus18'
 const goalCatalog = {
   'Aumentar promedio de ticket': {
     icon: 'UP',
+    image: ticketIcon,
     color: '#b91d33',
     description: 'Sube el valor de cada pedido con combos y productos complementarios.',
     impactLabel: 'Ticket estimado',
   },
   Diversificacion: {
     icon: '4X',
+    image: surtidoIcon,
     color: '#6c2bd9',
     description: 'Reduce dependencia de un solo producto y abre nuevas categorias.',
     impactLabel: 'Variedad estimada',
   },
   'Incrementar Pedidos': {
     icon: '$',
+    image: metaIcon,
     color: '#0f8f5f',
     description: 'Aumenta la frecuencia con recordatorios y recompra rapida.',
     impactLabel: 'Venta estimada',
   },
   'Aplicar Promociones': {
     icon: '%',
+    image: promoIcon,
     color: '#006bb6',
     description: 'Usa promociones en productos clave sin complicar el pedido.',
     impactLabel: 'Ahorro estimado',
   },
   'Crear Combos': {
     icon: '+',
+    image: comboIcon,
     color: '#f07c00',
     description: 'Une productos frecuentes para vender mas con una sola accion.',
     impactLabel: 'Combo estimado',
@@ -673,7 +679,9 @@ export default function MiMeta({ onAvatarClick }) {
                 style={{ '--goal-color': meta.color }}
                 onClick={() => openGoalPath({ ...item, title: item.tipo })}
               >
-                <span>{meta.icon}</span>
+                {meta.image
+                  ? <span><img src={meta.image} alt={item.tipo} /></span>
+                  : <span>{meta.icon}</span>}
                 <div>
                   <strong>{item.tipo}</strong>
                   <small>Prioridad {item.prioridad}</small>

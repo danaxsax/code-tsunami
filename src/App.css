@@ -753,6 +753,13 @@ body {
   color: var(--goal-color);
   font-weight: 900;
 }
+.generated-goal-pill > span img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: contain;
+  padding: 3px;
+}
 .generated-goal-pill strong {
   display: block;
   font-size: 13px;
