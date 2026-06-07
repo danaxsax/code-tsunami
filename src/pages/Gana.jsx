@@ -1,19 +1,31 @@
 import { useRef } from 'react'
 import Lottie from 'lottie-react'
 import celebrateAnimation from '../../assets/celebrate.json'
+import HelloAvatar from '../components/HelloAvatar.jsx'
+import { getRandomPhrase } from '../../phrases.js'
+import { speak } from '../services/tts.js'
+import { detectCountry } from '../services/location.js'
 
 export default function Gana({ onAvatarClick }) {
   const lottieRef = useRef(null)
 
+  const handleCelebrateClick = () => {
+    const country = detectCountry()
+    const phrase = getRandomPhrase('gana')
+    speak(phrase, country)
+    if (onAvatarClick) onAvatarClick()
+  }
+
   return (
     <div className="panel-pad">
+      <HelloAvatar onClick={onAvatarClick} />
       <div className="points-card">
         <span className="gana-logo">gana</span>
         <div className="mis">Mis Puntos</div>
         <div className="value">&#11088; 15,796</div>
         <button
           className="points-celebrate"
-          onClick={onAvatarClick}
+          onClick={handleCelebrateClick}
           aria-label="Abrir asistente AI"
         >
           <Lottie
