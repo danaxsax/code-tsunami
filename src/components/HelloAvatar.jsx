@@ -36,6 +36,7 @@ export default function HelloAvatar({ onClick, phrases = ['¿Necesitas ayuda? Pr
     const country = detectCountry()
     const list = phrases && phrases.length ? phrases : ['¿Necesitas ayuda? Estoy aquí para lo que necesites']
     const text = list[phraseIndex]
+    console.log(`[HelloAvatar] País detectado: ${country}, Frase: "${text}"`)
 
     speak(text, country).finally(() => {
       speakingRef.current = false
