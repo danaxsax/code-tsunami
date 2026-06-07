@@ -2,7 +2,8 @@ export async function speak(text, country = 'mexico') {
   try {
     const customerProfile = localStorage.getItem('tuali_customer_profile') || import.meta.env.VITE_CUSTOMER_PROFILE || '1_0012Eplus18'
 
-    const res = await fetch('/api/tts', {
+    const base = import.meta.env.VITE_API_URL || ''
+    const res = await fetch(`${base}/api/tts`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text, country, customerProfile }),

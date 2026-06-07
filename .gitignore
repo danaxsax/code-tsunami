@@ -9,3 +9,7 @@ npm-debug.log*
 # Optional: Ignore local environment variables
 .env
 .env.local
+
+# Amplify generated files
+.amplify/
+amplify/generated/

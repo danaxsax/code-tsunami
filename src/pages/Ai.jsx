@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import Lottie from 'lottie-react'
 import { Conversation } from '@elevenlabs/client'
 import helloAnimation from '../../assets/hello.json'
+import { apiUrl } from '../services/api.js'
 import lookAnimation from '../../assets/look.json'
 import idleAnimation from '../../assets/idle.json'
 import vipProfile from '../../agente-tuali/Casos Principales/1_0012Eplus18.json'
@@ -87,7 +88,7 @@ function buildDynamicVariables() {
 
 async function fetchElevenLabsSession(mode) {
   const endpoint = mode === 'voice' ? 'conversation-token' : 'signed-url'
-  const response = await fetch(`/api/elevenlabs/${endpoint}?agent_id=${encodeURIComponent(AGENT_ID)}`)
+  const response = await fetch(apiUrl(`/api/elevenlabs/${endpoint}?agent_id=${encodeURIComponent(AGENT_ID)}`))
   const data = await response.json().catch(() => ({}))
   if (!response.ok) throw new Error(data.error || `No se pudo iniciar sesion ElevenLabs ${mode}`)
   return data
