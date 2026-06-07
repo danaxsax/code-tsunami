@@ -1,4 +1,7 @@
 import HelloAvatar from '../components/HelloAvatar.jsx'
+import cocacolaLogo from '../../assets/cocacola-logo.png'
+import bokadosLogo from '../../assets/bokados-logo.png'
+import tetrapack from '../../assets/tetrapack.png'
 
 export default function Inicio({ onAvatarClick }) {
   return (
@@ -22,9 +25,12 @@ export default function Inicio({ onAvatarClick }) {
       </div>
 
       <div className="banners">
-        <div className="banner coca">Coca-Cola</div>
-        <div className="banner bokados">Bokados</div>
-        <div className="banner coca" style={{ background: '#0a8f3c' }}>Del Valle</div>
+        <div className="banner coca">
+          <img src={cocacolaLogo} alt="Coca-Cola" />
+        </div>
+        <div className="banner bokados">
+          <img src={bokadosLogo} alt="Bokados" />
+        </div>
       </div>
 
       <div className="resurtir">
@@ -44,7 +50,9 @@ export default function Inicio({ onAvatarClick }) {
             <span className="pieces-tag">4 PIEZAS</span>
             <span className="heart-out">&hearts;</span>
           </div>
-          <div className="product-img">&#129380;</div>
+          <div className="product-img">
+            <img src={tetrapack} alt="Del Valle Durazno Tetra Pack 250 ml" />
+          </div>
           <div className="name">Del Valle Durazno, Tetra Pack 250 ml, 4 Piezas</div>
           <div className="price">$39.50</div>
           <div className="pkg-label">Paquetes</div>

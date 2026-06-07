@@ -163,9 +163,16 @@ body {
   display: flex; align-items: center; justify-content: center;
   font-weight: 800; font-size: 16px;
   color: #fff;
+  overflow: hidden;
 }
-.banner.coca { background: #d8232a; }
-.banner.bokados { background: #f6d9a0; color: #c07b1f; }
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8px 12px;
+}
+.banner.coca { background: #fff; border: 1px solid var(--border); }
+.banner.bokados { background: #fff; border: 1px solid var(--border); }
 
 .resurtir {
   background: #f3e9f7;
@@ -197,10 +204,15 @@ body {
 }
 .product-card .heart-out { color: var(--muted); font-size: 18px; }
 .product-img {
-  height: 110px;
+  height: 140px;
   display: flex; align-items: center; justify-content: center;
   margin: 8px 0 14px;
   font-size: 46px;
+}
+.product-img img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
 }
 .product-card .name { font-size: 14px; line-height: 1.35; }
 .product-card .price { font-size: 19px; font-weight: 800; margin: 12px 0 6px; }

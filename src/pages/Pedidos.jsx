@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import HelloAvatar from '../components/HelloAvatar.jsx'
+import cocacolaLogo from '../../assets/cocacola-logo.png'
+import bokadosLogo from '../../assets/bokados-logo.png'
 
 const filters = ['Todos', 'Activos', 'Entregados', 'Cancelados']
 
@@ -45,8 +47,12 @@ export default function Pedidos({ onAvatarClick }) {
       <h2 className="section-title">Pedidos Coca-Cola</h2>
 
       <div className="pedidos-banners">
-        <div className="banner coca">Coca-Cola</div>
-        <div className="banner bokados">Bokados</div>
+        <div className="banner coca">
+          <img src={cocacolaLogo} alt="Coca-Cola" />
+        </div>
+        <div className="banner bokados">
+          <img src={bokadosLogo} alt="Bokados" />
+        </div>
       </div>
 
       <div className="filters">
