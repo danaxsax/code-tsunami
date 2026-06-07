@@ -84,11 +84,11 @@ const socialMissionSeed = [
   },
   {
     id: 'story-store',
-    title: 'Comparte una historia de tu tienda',
+    title: 'Comparte un reel de tu tienda',
     reason: 'Promueve tu punto de venta fuera de la app.',
     reward: '+80 pts',
     time: '24 h',
-    status: 'en progreso',
+    status: 'disponible',
   },
   {
     id: 'display-photo',
@@ -143,41 +143,76 @@ const tiktokParticipants = [
   },
 ]
 
+const instagramParticipants = [
+  {
+    store: 'Abarrotes El Sol',
+    cluster: 'Recurrente',
+    points: '+80 pts',
+    caption: 'Mostrando mi tienda en un reel',
+    handle: '@elsol_tienda',
+    url: 'https://www.instagram.com/reel/DNOxTOopp1h/?hl=es',
+  },
+  {
+    store: 'Tienda La Bendicion',
+    cluster: 'Nicho',
+    points: '+80 pts',
+    caption: 'Vengan por sus promos!',
+    handle: '@labendicion_tienda',
+    url: 'https://www.instagram.com/reel/DDxNYNVuuol/',
+  },
+  {
+    store: 'Mini Super Don Juan',
+    cluster: 'VIP',
+    points: '+80 pts',
+    caption: 'Mi reel diario',
+    handle: '@donjuan_super',
+    url: 'https://www.instagram.com/reel/DJDFPI0PrCf/',
+  },
+]
+
 const clusterRankings = {
   VIP: {
-    challenge: 'Reto VIP: sube tu ticket promedio 10%',
+    challenge: 'Reto: sube tu ticket promedio 10%',
     prize: 'Premio: 450 puntos y combo destacado',
     ranking: [
       { store: 'Abarrotes Lupita', progress: 92 },
       { store: 'Mini Super El Sol', progress: 78 },
       { store: 'Abarrotes Chabelita', progress: 62, me: true },
+      { store: 'Tienda La Esperanza', progress: 54 },
+      { store: 'Miscelanea El Amigo', progress: 48 },
     ],
   },
   Nicho: {
-    challenge: 'Reto Nicho: suma 2 categorias nuevas',
+    challenge: 'Reto: suma 2 categorias nuevas',
     prize: 'Premio: 300 puntos y promocion sugerida',
     ranking: [
       { store: 'Miscelanea La 20', progress: 84 },
       { store: 'Abarrotes Chabelita', progress: 64, me: true },
       { store: 'Tienda Don Pepe', progress: 58 },
+      { store: 'Abarrotes El Paso', progress: 51 },
+      { store: 'Super Neto', progress: 45 },
     ],
   },
   Recurrente: {
-    challenge: 'Reto Recurrente: completa 3 pedidos esta semana',
+    challenge: 'Reto: completa 3 pedidos esta semana',
     prize: 'Premio: 350 puntos y reto bonus',
     ranking: [
       { store: 'Mini Super El Sol', progress: 88 },
       { store: 'Abarrotes Lupita', progress: 72 },
       { store: 'Abarrotes Chabelita', progress: 61, me: true },
+      { store: 'Tienda Aurora', progress: 55 },
+      { store: 'Miscelanea La 20', progress: 49 },
     ],
   },
   Ocasional: {
-    challenge: 'Reto Ocasional: reactiva tu pedido en 7 dias',
+    challenge: 'Reto: reactiva tu pedido en 7 dias',
     prize: 'Premio: 220 puntos y descuento de recompra',
     ranking: [
       { store: 'La Esquina', progress: 76 },
       { store: 'Abarrotes Chabelita', progress: 48, me: true },
       { store: 'Tienda Aurora', progress: 42 },
+      { store: 'Abarrotes Don Memo', progress: 38 },
+      { store: 'Mini Super Express', progress: 31 },
     ],
   },
 }
@@ -328,8 +363,14 @@ function buildAchievements({ acceptedCount, customGoalsCount, completedSocialCou
 export default function MiMeta({ onAvatarClick }) {
   const [accepted, setAccepted] = useState(['Combo inteligente'])
   const [feedback, setFeedback] = useState('')
+  const [feedbackType, setFeedbackType] = useState(null) // 'positive' or 'negative'
+  const [showCommentBox, setShowCommentBox] = useState(false)
   const [socialMissions, setSocialMissions] = useState(socialMissionSeed)
   const [showTikTokFeed, setShowTikTokFeed] = useState(false)
+  const [showInstagramFeed, setShowInstagramFeed] = useState(false)
+  const [showUploadMenu, setShowUploadMenu] = useState(false)
+  const [showFullRanking, setShowFullRanking] = useState(false)
+  const [dismissedTags, setDismissedTags] = useState([])
   const [customGoals, setCustomGoals] = useState([])
   const [customDraft, setCustomDraft] = useState({
     type: 'Subir ticket promedio',
@@ -402,10 +443,31 @@ export default function MiMeta({ onAvatarClick }) {
   }
 
   function handleSocialMissionClick(id) {
+    const mission = socialMissions.find((m) => m.id === id)
+    if (id === 'story-store' && mission?.status === 'disponible') {
+      setShowInstagramFeed(true)
+    }
+    if (id === 'poster-counter' && mission?.status === 'disponible') {
+      setShowUploadMenu(true)
+      return
+    }
+
     advanceSocialMission(id)
     if (id === 'tiktok-combo') {
       setShowTikTokFeed(true)
     }
+  }
+
+  function handlePosterUpload() {
+    setSocialMissions((current) =>
+      current.map((mission) => {
+        if (mission.id === 'poster-counter') {
+          return { ...mission, status: 'completada' }
+        }
+        return mission
+      }),
+    )
+    setShowUploadMenu(false)
   }
 
   return (
@@ -485,42 +547,50 @@ export default function MiMeta({ onAvatarClick }) {
         <div className="goal-section-head">
           <div>
             <h2>Metas recomendadas</h2>
-            <p>Acciones calculadas desde su perfil y metas.</p>
+            <p>Acciones calculadas desde su perfil and metas.</p>
           </div>
           <span className="goal-streak">4 dias</span>
         </div>
 
-        {plan.recommendations.map((rec, index) => {
-          const isAccepted = accepted.includes(rec.tag)
+        {plan.recommendations
+          .filter((rec) => !dismissedTags.includes(rec.tag))
+          .map((rec, index) => {
+            const isAccepted = accepted.includes(rec.tag)
 
-          return (
-            <article className={`mission-card ${isAccepted ? 'accepted' : ''}`} key={rec.tag}>
-              <div className="mission-step">
-                <span>{index + 1}</span>
-              </div>
-              <div className="mission-content">
-                <div className="mission-top">
-                  <span className="mission-tag">{rec.tag}</span>
-                  {isAccepted && <span className="mission-check">Aceptada</span>}
+            return (
+              <article className={`mission-card ${isAccepted ? 'accepted' : ''}`} key={rec.tag}>
+                <div className="mission-step">
+                  <span>{index + 1}</span>
                 </div>
-                <h3>{rec.title}</h3>
-                <p>{rec.reason}</p>
-                <div className="mission-impact">
-                  <span>{rec.impact}</span>
-                  <span>{rec.points}</span>
+                <div className="mission-content">
+                  <div className="mission-top">
+                    <span className="mission-tag">{rec.tag}</span>
+                    {isAccepted && <span className="mission-check">Aceptada</span>}
+                  </div>
+                  <h3>{rec.title}</h3>
+                  <p>{rec.reason}</p>
+                  <div className="mission-impact">
+                    <span>{rec.impact}</span>
+                    <span>{rec.points}</span>
+                  </div>
+                  <div className="mission-actions">
+                    <button className="mission-primary" onClick={() => toggleRecommendation(rec.tag)}>
+                      {isAccepted ? 'Quitar' : 'Agregar al pedido'}
+                    </button>
+                    <button
+                      className="mission-secondary"
+                      onClick={() => {
+                        setDismissedTags((prev) => [...prev, rec.tag])
+                        setFeedback('Tuali bajara inversion inicial y ajustara futuras recomendaciones.')
+                      }}
+                    >
+                      No me interesa
+                    </button>
+                  </div>
                 </div>
-                <div className="mission-actions">
-                  <button className="mission-primary" onClick={() => toggleRecommendation(rec.tag)}>
-                    {isAccepted ? 'Quitar' : 'Agregar al pedido'}
-                  </button>
-                  <button className="mission-secondary" onClick={() => setFeedback('Tuali bajara inversion inicial y ajustara futuras recomendaciones.')}>
-                    No me interesa
-                  </button>
-                </div>
-              </div>
-            </article>
-          )
-        })}
+              </article>
+            )
+          })}
       </section>
 
       <section className="custom-goal-card">
@@ -606,7 +676,7 @@ export default function MiMeta({ onAvatarClick }) {
                 <p>{mission.reason}</p>
               </div>
               <button onClick={() => handleSocialMissionClick(mission.id)}>
-                {mission.status === 'completada' ? 'Lista' : mission.status === 'en progreso' ? 'Completar' : 'Participar'}
+                {mission.status === 'completada' ? 'Listo' : mission.status === 'en progreso' ? 'Completar' : 'Participar'}
               </button>
             </div>
 
@@ -618,6 +688,33 @@ export default function MiMeta({ onAvatarClick }) {
                 </div>
                 <div className="tiktok-list">
                   {tiktokParticipants.map((participant) => (
+                    <a
+                      className="tiktok-card"
+                      href={participant.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      key={participant.url}
+                    >
+                      <span className="tiktok-play">▶</span>
+                      <div>
+                        <strong>{participant.store}</strong>
+                        <small>{participant.cluster} · {participant.points}</small>
+                      </div>
+                      <b>Ver</b>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {mission.id === 'story-store' && (
+              <div className="tiktok-participants instagram-participants">
+                <div className="tiktok-participants-head">
+                  <strong>Participantes del reto</strong>
+                  <span>{instagramParticipants.length} reels</span>
+                </div>
+                <div className="tiktok-list">
+                  {instagramParticipants.map((participant) => (
                     <a
                       className="tiktok-card"
                       href={participant.url}
@@ -668,7 +765,7 @@ export default function MiMeta({ onAvatarClick }) {
         <div className="goal-section-head">
           <div>
             <h2>Competencia de mi cluster</h2>
-            <p>Compites con clientes {profile.perfil} con metas parecidas.</p>
+            <p>Compites con clientes con metas parecidas.</p>
           </div>
         </div>
         <div className="cluster-challenge">
@@ -676,11 +773,11 @@ export default function MiMeta({ onAvatarClick }) {
           <span>{competition.prize}</span>
         </div>
         <div className="ranking-list">
-          {competition.ranking.map((item, index) => (
-            <div className={`ranking-row ${item.me ? 'me' : ''}`} key={item.store}>
+          {competition.ranking.slice(0, 3).map((item, index) => (
+            <div className={`ranking-row ${item.me ? 'me' : ''}`} key={`${item.store}-${index}`}>
               <span className="ranking-pos">{index + 1}</span>
               <div>
-                <strong>{item.store}</strong>
+                <strong>{item.me ? item.store : `Competidor ${index + 1}`}</strong>
                 <div className="ranking-progress">
                   <span style={{ width: `${item.progress}%` }} />
                 </div>
@@ -691,9 +788,42 @@ export default function MiMeta({ onAvatarClick }) {
         </div>
         <div className="cluster-footer">
           <span>Tu posicion: #{myPosition}</span>
-          <button>Ver reto del cluster</button>
+          <button onClick={() => setShowFullRanking(true)}>Ver reto del cluster</button>
         </div>
       </section>
+
+      {showFullRanking && (
+        <div className="tiktok-feed-overlay upload-overlay" role="dialog" aria-modal="true" aria-label="Ranking completo">
+          <div className="tiktok-feed-shell upload-shell">
+            <div className="tiktok-feed-header">
+              <div>
+                <span>Detalle</span>
+                <strong>Tabla de porcentajes</strong>
+              </div>
+              <button onClick={() => setShowFullRanking(false)} aria-label="Cerrar ranking">
+                X
+              </button>
+            </div>
+            <div className="upload-content" style={{ padding: '16px' }}>
+              <div className="ranking-list">
+                {competition.ranking.map((item, index) => (
+                  <div className={`ranking-row ${item.me ? 'me' : ''}`} key={`${item.store}-full-${index}`}>
+                    <span className="ranking-pos">{index + 1}</span>
+                    <div style={{ textAlign: 'left' }}>
+                      <strong>{item.me ? item.store : `Competidor ${index + 1}`}</strong>
+                      <small style={{ color: 'var(--muted)', fontSize: '11px' }}>Progreso del reto</small>
+                    </div>
+                    <b style={{ fontSize: '15px' }}>{item.progress}%</b>
+                  </div>
+                ))}
+              </div>
+              <button className="upload-submit-btn" onClick={() => setShowFullRanking(false)} style={{ marginTop: '16px' }}>
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {showTikTokFeed && (
         <div className="tiktok-feed-overlay" role="dialog" aria-modal="true" aria-label="Participantes del reto TikTok">
@@ -744,24 +874,122 @@ export default function MiMeta({ onAvatarClick }) {
         </div>
       )}
 
-      <section className="feedback-card">
+      {showInstagramFeed && (
+        <div className="tiktok-feed-overlay instagram-feed-overlay" role="dialog" aria-modal="true" aria-label="Participantes del reto Instagram">
+          <div className="tiktok-feed-shell">
+            <div className="tiktok-feed-header">
+              <div>
+                <span>Reto social</span>
+                <strong>Reel de tu tienda</strong>
+              </div>
+              <button onClick={() => setShowInstagramFeed(false)} aria-label="Cerrar feed">
+                X
+              </button>
+            </div>
+
+            <div className="tiktok-feed">
+              {instagramParticipants.map((participant, index) => (
+                <article className="tiktok-slide" key={participant.url} style={{ '--slide-index': index + 1 }}>
+                  <div className="tiktok-mock-top">
+                    <span>Siguiendo</span>
+                    <strong>Para ti</strong>
+                  </div>
+                  <div className="tiktok-slide-bg">
+                    <div className="tiktok-thumbnail">
+                      <span className="tiktok-thumbnail-label">Instagram Challenge</span>
+                      <strong>{participant.store}</strong>
+                      <small>{participant.caption}</small>
+                    </div>
+                    <span className="tiktok-slide-play" aria-hidden="true" />
+                  </div>
+                  <div className="tiktok-side-actions">
+                    <span>♥</span>
+                    <small>{8 + index * 5}k</small>
+                    <span>↗</span>
+                    <small>{participant.points}</small>
+                  </div>
+                  <div className="tiktok-slide-copy">
+                    <span>Reel {index + 1} de {instagramParticipants.length}</span>
+                    <h3>{participant.store}</h3>
+                    <p>{participant.handle} · {participant.cluster} · {participant.caption}</p>
+                    <a href={participant.url} target="_blank" rel="noreferrer">
+                      Ver Reel
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showUploadMenu && (
+        <div className="tiktok-feed-overlay upload-overlay" role="dialog" aria-modal="true" aria-label="Subir foto del cartel">
+          <div className="tiktok-feed-shell upload-shell">
+            <div className="tiktok-feed-header">
+              <div>
+                <span>Evidencia</span>
+                <strong>Foto de cartel</strong>
+              </div>
+              <button onClick={() => setShowUploadMenu(false)} aria-label="Cerrar menu">
+                X
+              </button>
+            </div>
+            <div className="upload-content">
+              <p>Sube aqui una foto de tu cartel</p>
+              <div className="upload-dropzone">
+                <span>📁</span>
+                <input type="file" id="poster-file" style={{ display: 'none' }} />
+                <label htmlFor="poster-file">Elegir archivo</label>
+              </div>
+              <button className="upload-submit-btn" onClick={handlePosterUpload}>
+                Subir
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <section className={`feedback-card feedback-state-${feedbackType}`}>
         <div>
           <h2>Te ayudo esta recomendacion?</h2>
           <p>{feedback || 'Tu respuesta entrena al agente para recomendar mejor la proxima vez.'}</p>
         </div>
         <div className="feedback-actions">
-          <button onClick={() => setFeedback('Perfecto. Tuali priorizara misiones similares para este perfil.')}>
+          <button
+            className={feedbackType === 'positive' ? 'active-si' : ''}
+            onClick={() => {
+              setFeedback('Perfecto. Tuali priorizara misiones similares para este perfil.')
+              setFeedbackType('positive')
+              setShowCommentBox(false)
+            }}
+          >
             Si, me sirvio
           </button>
-          <button onClick={() => setFeedback('Entendido. Te mostrare opciones mas simples y de menor inversion.')}>
+          <button
+            className={feedbackType === 'negative' ? 'active-no' : ''}
+            onClick={() => {
+              setFeedback('Entendido. Te mostrare opciones mas simples y de menor inversion.')
+              setFeedbackType('negative')
+              setShowCommentBox(true)
+            }}
+          >
             No fue util
           </button>
         </div>
-      </section>
 
-      <div className="profile-source">
-        Perfil cargado: agente-tuali/Casos Principales/{loggedProfile.fileName}.json
-      </div>
+        {showCommentBox && (
+          <div className="feedback-comment-area">
+            <textarea
+              placeholder="Cuentanos como podemos mejorar o que te gustaria ver..."
+              rows={3}
+            />
+            <button className="upload-submit-btn" onClick={() => setShowCommentBox(false)}>
+              Enviar comentarios
+            </button>
+          </div>
+        )}
+      </section>
     </div>
   )
 }
