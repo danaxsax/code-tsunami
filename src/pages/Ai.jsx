@@ -1,11 +1,18 @@
 import { useState, useRef, useEffect } from 'react'
+import Lottie from 'lottie-react'
+import helloAnimation from '../../assets/hello.json'
+import lookAnimation from '../../assets/look.json'
 
 export default function Ai() {
   const [messages, setMessages] = useState([
     { text: '¡Hola! Soy el asistente de Code Tsunami. ¿En qué puedo ayudarte?', who: 'bot' },
   ])
   const [input, setInput] = useState('')
+  const [animation, setAnimation] = useState(helloAnimation)
   const chatRef = useRef(null)
+  const lottieRef = useRef(null)
+
+  const SPEED = 2.5
 
   useEffect(() => {
     if (chatRef.current) {
@@ -25,6 +32,7 @@ export default function Ai() {
         ...prev,
         { text: 'Gracias por tu mensaje. Estoy en desarrollo — pronto podré responder automáticamente. 🚀', who: 'bot' },
       ])
+      setAnimation(lookAnimation)
     }, 600)
   }
 
@@ -37,6 +45,17 @@ export default function Ai() {
 
   return (
     <>
+      <div className="chat-avatar">
+        <Lottie
+          key={animation === helloAnimation ? 'hello' : 'look'}
+          lottieRef={lottieRef}
+          animationData={animation}
+          loop
+          autoplay
+          onDOMLoaded={() => lottieRef.current?.setSpeed(SPEED)}
+          style={{ width: 140, height: 140 }}
+        />
+      </div>
       <div className="chat-messages" ref={chatRef}>
         {messages.map((msg, i) => (
           <div key={i} className={`msg ${msg.who}`}>{msg.text}</div>

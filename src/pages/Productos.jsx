@@ -1,4 +1,6 @@
-export default function Productos() {
+import HelloAvatar from '../components/HelloAvatar.jsx'
+
+export default function Productos({ onAvatarClick }) {
   const categorias = [
     { emoji: '\u{1F964}', label: 'Refrescos', type: 'emoji' },
     { emoji: '\u{1F4A7}', label: 'Agua', type: 'emoji' },
@@ -16,6 +18,7 @@ export default function Productos() {
 
   return (
     <div className="panel-pad">
+      <HelloAvatar onClick={onAvatarClick} />
       <h2 className="section-title">Categorías</h2>
       <div className="cat-grid">
         {categorias.map((cat, i) => (

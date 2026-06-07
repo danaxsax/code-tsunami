@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import HelloAvatar from '../components/HelloAvatar.jsx'
 
 const filters = ['Todos', 'Activos', 'Entregados', 'Cancelados']
 
@@ -35,11 +36,12 @@ const orders = [
   },
 ]
 
-export default function Pedidos() {
+export default function Pedidos({ onAvatarClick }) {
   const [activeFilter, setActiveFilter] = useState('Todos')
 
   return (
     <div className="panel-pad">
+      <HelloAvatar onClick={onAvatarClick} />
       <h2 className="section-title">Pedidos Coca-Cola</h2>
 
       <div className="pedidos-banners">

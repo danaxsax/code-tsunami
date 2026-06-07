@@ -1,10 +1,30 @@
-export default function Gana() {
+import { useRef } from 'react'
+import Lottie from 'lottie-react'
+import celebrateAnimation from '../../assets/celebrate.json'
+
+export default function Gana({ onAvatarClick }) {
+  const lottieRef = useRef(null)
+
   return (
     <div className="panel-pad">
       <div className="points-card">
         <span className="gana-logo">gana</span>
         <div className="mis">Mis Puntos</div>
         <div className="value">&#11088; 15,796</div>
+        <button
+          className="points-celebrate"
+          onClick={onAvatarClick}
+          aria-label="Abrir asistente AI"
+        >
+          <Lottie
+            lottieRef={lottieRef}
+            animationData={celebrateAnimation}
+            loop
+            autoplay
+            onDOMLoaded={() => lottieRef.current?.setSpeed(2.5)}
+            style={{ width: 110, height: 110 }}
+          />
+        </button>
       </div>
 
       <div className="points-warn">

@@ -1,6 +1,9 @@
-export default function Inicio() {
+import HelloAvatar from '../components/HelloAvatar.jsx'
+
+export default function Inicio({ onAvatarClick }) {
   return (
     <>
+      <HelloAvatar onClick={onAvatarClick} />
       <div className="pos-bar">
         <div>
           <div className="pos-label">Punto de venta</div>

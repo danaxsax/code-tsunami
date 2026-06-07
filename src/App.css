@@ -287,6 +287,33 @@ body {
 }
 .points-card .mis { margin-top: 18px; font-size: 16px; opacity: .95; }
 .points-card .value { font-size: 38px; font-weight: 800; display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+.points-card .points-celebrate {
+  position: absolute;
+  right: 6px;
+  bottom: -6px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.hello-avatar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: var(--card);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 6px 14px;
+  cursor: pointer;
+  text-align: left;
+}
+.hello-avatar-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wine);
+}
 .points-warn {
   background: #fdf3d6;
   color: #7a5a12;
@@ -379,6 +406,15 @@ body {
 .order-status { display: inline-flex; align-items: center; gap: 6px; color: #2e9e4f; font-size: 13px; font-weight: 600; }
 
 /* ---------- AI CHAT ---------- */
+.chat-avatar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 4px 0;
+}
 .chat-messages {
   flex: 1 1 auto;
   overflow-y: auto;

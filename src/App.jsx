@@ -20,16 +20,17 @@ export default function App() {
   }
 
   const ActivePanel = panels[activeTab]
+  const goToAi = () => setActiveTab('ai')
 
   return (
     <div className="app">
       <Header />
 
       <main className="main">
-        <div className={`panel ${activeTab === 'inicio' ? 'active' : ''}`} id="panel-inicio"><Inicio /></div>
-        <div className={`panel ${activeTab === 'productos' ? 'active' : ''}`} id="panel-productos"><Productos /></div>
-        <div className={`panel ${activeTab === 'gana' ? 'active' : ''}`} id="panel-gana"><Gana /></div>
-        <div className={`panel ${activeTab === 'pedidos' ? 'active' : ''}`} id="panel-pedidos"><Pedidos /></div>
+        <div className={`panel ${activeTab === 'inicio' ? 'active' : ''}`} id="panel-inicio"><Inicio onAvatarClick={goToAi} /></div>
+        <div className={`panel ${activeTab === 'productos' ? 'active' : ''}`} id="panel-productos"><Productos onAvatarClick={goToAi} /></div>
+        <div className={`panel ${activeTab === 'gana' ? 'active' : ''}`} id="panel-gana"><Gana onAvatarClick={goToAi} /></div>
+        <div className={`panel ${activeTab === 'pedidos' ? 'active' : ''}`} id="panel-pedidos"><Pedidos onAvatarClick={goToAi} /></div>
         <div className={`panel ${activeTab === 'ai' ? 'active' : ''}`} id="panel-ai"><Ai /></div>
       </main>
 
