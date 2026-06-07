@@ -1,12 +1,13 @@
-const COUNTRIES = [
-  { code: 'mexico',    label: 'México',    timezone: 'America/Mexico_City' },
-  { code: 'argentina', label: 'Argentina',  timezone: 'America/Argentina/Buenos_Aires' },
-  { code: 'peru',      label: 'Perú',       timezone: 'America/Lima' },
-  { code: 'ecuador',   label: 'Ecuador',    timezone: 'America/Guayaquil' },
-]
+import sample from '../../volumen_sample.json'
 
 export function detectCountry() {
-  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
-  const match = COUNTRIES.find(c => c.timezone === tz)
-  return match ? match.code : 'mexico'
+  return sample['país'] || 'mexico'
+}
+
+export function getStoreInfo() {
+  return {
+    nombre: sample.punto_venta || '',
+    direccion: sample.direccion || '',
+    pais: sample['país'] || 'mexico',
+  }
 }

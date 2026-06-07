@@ -17,6 +17,8 @@ export async function speak(text, country = 'mexico') {
 
   const voiceId = VOICES[country] || VOICES.mexico
 
+  console.log(`[TTS] País detectado: ${country} | Voz: ${voiceId}`)
+
   try {
     const res = await fetch(`${API_BASE}/text-to-speech/${voiceId}`, {
       method: 'POST',
@@ -44,6 +46,7 @@ export async function speak(text, country = 'mexico') {
     const audio = new Audio(url)
     audio.onended = () => URL.revokeObjectURL(url)
     await audio.play()
+    console.log(`[TTS] Reproduciendo audio para: ${country}`)
   } catch (err) {
     console.error('[TTS] Failed to speak:', err)
   }
