@@ -1,0 +1,51 @@
+{
+  "customer_id": "3.19335E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 186.01,
+    "score_nicho": 0.07692307692307693
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "DOWNY FLORAL 730 ML PET 1",
+        "share_producto_top": "7.7%",
+        "categorias_actuales": 13
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "DOWNY FLORAL 730 ML PET 1"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "DOWNY FLORAL 730 ML PET 1",
+          "Suavizante de Ropa Downy 5 en 1 Amanecer 730ml / Bote"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

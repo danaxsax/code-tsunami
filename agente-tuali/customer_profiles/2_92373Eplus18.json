@@ -1,0 +1,51 @@
+{
+  "customer_id": "2.92373E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 1155.0,
+    "score_nicho": 0.25
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Fanta Naranja",
+        "share_producto_top": "25.0%",
+        "categorias_actuales": 4
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Fanta Naranja"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Fanta Naranja",
+          "Ciel 0% Azúcar Jamaica"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

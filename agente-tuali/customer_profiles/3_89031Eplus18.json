@@ -1,0 +1,51 @@
+{
+  "customer_id": "3.89031E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 0.0,
+    "score_nicho": 0.09090909090909091
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Desodorante Old Spice Barra FWL 50 G 3 Pack",
+        "share_producto_top": "9.1%",
+        "categorias_actuales": 11
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Desodorante Old Spice Barra FWL 50 G 3 Pack"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Desodorante Old Spice Barra FWL 50 G 3 Pack",
+          "Sopa Instantánea Maruchan Ramen Camarón 85 Gr / Bolsa"
+        ]
+      }
+    }
+  ],
+  "pais": "Perú"
+}

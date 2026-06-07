@@ -1,0 +1,51 @@
+{
+  "customer_id": "4.7849E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 2,
+    "ticket_promedio": 879.0,
+    "score_nicho": 0.10084033613445378
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Coca - Cola",
+        "share_producto_top": "10.1%",
+        "categorias_actuales": 63
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 2,
+        "target_frecuencia": 3
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Coca - Cola"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Coca - Cola",
+          "Valle Frut Citrus Punch"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

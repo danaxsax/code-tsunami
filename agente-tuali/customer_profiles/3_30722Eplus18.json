@@ -1,0 +1,51 @@
+{
+  "customer_id": "3.30722E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 839.01,
+    "score_nicho": 0.15384615384615385
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Azúcar Switen Estándar 500 Gr / Bolsa",
+        "share_producto_top": "15.4%",
+        "categorias_actuales": 7
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Azúcar Switen Estándar 500 Gr / Bolsa"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Azúcar Switen Estándar 500 Gr / Bolsa",
+          "Sopa Instantánea Maruchan Ramen Camarón Limón y Habanero 85 Gr / Bolsa"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

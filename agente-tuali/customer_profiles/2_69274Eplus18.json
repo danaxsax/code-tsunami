@@ -1,0 +1,51 @@
+{
+  "customer_id": "2.69274E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 1845.57,
+    "score_nicho": 0.125
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Plato 10 1/4 Llano Alegría (20x25u)                                                                                                                                                                                                                       ",
+        "share_producto_top": "12.5%",
+        "categorias_actuales": 8
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Plato 10 1/4 Llano Alegría (20x25u)                                                                                                                                                                                                                       "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Plato 10 1/4 Llano Alegría (20x25u)                                                                                                                                                                                                                       ",
+          "Plato 10 1/4 Compartido Alegría (20x25u)                                                                                                                                                                                                                  "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

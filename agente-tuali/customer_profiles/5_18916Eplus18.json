@@ -1,0 +1,51 @@
+{
+  "customer_id": "5.18916E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 2,
+    "ticket_promedio": 43.355000000000004,
+    "score_nicho": 0.08333333333333333
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Promo 25%: Toni Mix Hojuelas Frutilla+ Yogurt Bebible Frutilla                                                                                                                                                                                            ",
+        "share_producto_top": "8.3%",
+        "categorias_actuales": 12
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 2,
+        "target_frecuencia": 3
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Promo 25%: Toni Mix Hojuelas Frutilla+ Yogurt Bebible Frutilla                                                                                                                                                                                            "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Promo 25%: Toni Mix Hojuelas Frutilla+ Yogurt Bebible Frutilla                                                                                                                                                                                            ",
+          "Leche Saborizada Canela 1Lt.                                                                                                                                                                                                                              "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

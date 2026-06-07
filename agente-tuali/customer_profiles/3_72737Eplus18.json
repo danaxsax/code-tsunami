@@ -1,0 +1,51 @@
+{
+  "customer_id": "3.72737E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 109.19,
+    "score_nicho": 0.3333333333333333
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "En Coca Cola Original 120UN 300ML",
+        "share_producto_top": "33.3%",
+        "categorias_actuales": 3
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "En Coca Cola Original 120UN 300ML"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "En Coca Cola Original 120UN 300ML",
+          "En Coca Cola Zero Azucar 6UN 250ML & Fanta Naranja 3UN 250ML & Fioravanti Fresa 3UN 250ML & Fioravanti Manzana 3UN 250ML & Inca Kola 3UN 300ML & Sprite 6UN 250ML"
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

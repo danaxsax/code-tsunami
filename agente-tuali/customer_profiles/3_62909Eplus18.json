@@ -1,0 +1,51 @@
+{
+  "customer_id": "3.62909E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 14.61,
+    "score_nicho": 0.16666666666666666
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Yogurt Toni Frutilla 750 Gr.                                                                                                                                                                                                                              ",
+        "share_producto_top": "16.7%",
+        "categorias_actuales": 9
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Yogurt Toni Frutilla 750 Gr.                                                                                                                                                                                                                              "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Yogurt Toni Frutilla 750 Gr.                                                                                                                                                                                                                              ",
+          "Yogurt Chiqui Mix Frutilla con Bolitas 92 Gr.                                                                                                                                                                                                             "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

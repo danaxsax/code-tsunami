@@ -1,0 +1,51 @@
+{
+  "customer_id": "2.11224E+18",
+  "perfil": "VIP",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 9736.03,
+    "score_nicho": 0.3333333333333333
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Topo Chico Agua Mineral",
+        "share_producto_top": "33.3%",
+        "categorias_actuales": 5
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Baja",
+        "top_sku_para_promo": "Topo Chico Agua Mineral"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Topo Chico Agua Mineral",
+          "Coca - Cola Zero"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

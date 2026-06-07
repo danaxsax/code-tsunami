@@ -1,0 +1,51 @@
+{
+  "customer_id": "1.09594E+18",
+  "perfil": "VIP",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 5004.49,
+    "score_nicho": 0.3888888888888889
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Coca - Cola",
+        "share_producto_top": "38.9%",
+        "categorias_actuales": 11
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Baja",
+        "top_sku_para_promo": "Coca - Cola"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Coca - Cola",
+          "Topo Chico Agua Mineral"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

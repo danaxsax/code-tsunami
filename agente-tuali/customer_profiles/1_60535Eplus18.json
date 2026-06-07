@@ -1,0 +1,51 @@
+{
+  "customer_id": "1.60535E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 0.0,
+    "score_nicho": 0.2
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Azúcar San Carlos Blanca Funda 1/2 Kg /500 Gr                                                                                                                                                                                                             ",
+        "share_producto_top": "20.0%",
+        "categorias_actuales": 5
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Azúcar San Carlos Blanca Funda 1/2 Kg /500 Gr                                                                                                                                                                                                             "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Azúcar San Carlos Blanca Funda 1/2 Kg /500 Gr                                                                                                                                                                                                             ",
+          "Yogurt Chiqui Mix Frutilla con Bolitas 92 Gr.                                                                                                                                                                                                             "
+        ]
+      }
+    }
+  ],
+  "pais": "Perú"
+}

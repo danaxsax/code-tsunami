@@ -1,0 +1,50 @@
+{
+  "customer_id": "4.58494E+18",
+  "perfil": "Nicho",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 0.0,
+    "score_nicho": 1.0
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Coca-Cola Sabor Original",
+        "share_producto_top": "100.0%",
+        "categorias_actuales": 1
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Coca-Cola Sabor Original"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Coca-Cola Sabor Original"
+        ]
+      }
+    }
+  ],
+  "pais": "Perú"
+}

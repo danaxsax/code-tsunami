@@ -1,0 +1,51 @@
+{
+  "customer_id": "5.16027E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 15.79,
+    "score_nicho": 0.5
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Promo 17%: 4 Toni Mix Fr. + 1 Leche Semidescremada 750Ml.                                                                                                                                                                                                 ",
+        "share_producto_top": "50.0%",
+        "categorias_actuales": 2
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Promo 17%: 4 Toni Mix Fr. + 1 Leche Semidescremada 750Ml.                                                                                                                                                                                                 "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Promo 17%: 4 Toni Mix Fr. + 1 Leche Semidescremada 750Ml.                                                                                                                                                                                                 ",
+          "Fideo Lonchys Pollo Vaso 63 Gr.                                                                                                                                                                                                                           "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

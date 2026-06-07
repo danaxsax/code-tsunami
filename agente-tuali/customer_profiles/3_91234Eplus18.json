@@ -1,0 +1,51 @@
+{
+  "customer_id": "3.91234E+18",
+  "perfil": "VIP",
+  "metricas_base": {
+    "frecuencia": 3,
+    "ticket_promedio": 23242.296666666665,
+    "score_nicho": 0.3225806451612903
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Coca - Cola",
+        "share_producto_top": "32.3%",
+        "categorias_actuales": 30
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 3,
+        "target_frecuencia": 4
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Baja",
+        "top_sku_para_promo": "Coca - Cola"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Coca - Cola",
+          "Fanta Naranja"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

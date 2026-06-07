@@ -1,0 +1,51 @@
+{
+  "customer_id": "1.63082E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 209.79,
+    "score_nicho": 0.05263157894736842
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Yogurt Mix Vainilla con Bolitas 180 Gr.                                                                                                                                                                                                                   ",
+        "share_producto_top": "5.3%",
+        "categorias_actuales": 19
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Yogurt Mix Vainilla con Bolitas 180 Gr.                                                                                                                                                                                                                   "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Yogurt Mix Vainilla con Bolitas 180 Gr.                                                                                                                                                                                                                   ",
+          "Yogurt Chiqui Mix Durazno con Hojuelas 92 Gr.                                                                                                                                                                                                             "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

@@ -1,0 +1,51 @@
+{
+  "customer_id": "2.65781E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 2,
+    "ticket_promedio": 160.51,
+    "score_nicho": 0.6666666666666666
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Jack & Coke",
+        "share_producto_top": "66.7%",
+        "categorias_actuales": 2
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 2,
+        "target_frecuencia": 3
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Jack & Coke"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Jack & Coke",
+          "Coca-Cola Sabor Original"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

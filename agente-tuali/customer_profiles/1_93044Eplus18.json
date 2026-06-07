@@ -1,0 +1,51 @@
+{
+  "customer_id": "1.93044E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 2,
+    "ticket_promedio": 19.495,
+    "score_nicho": 0.06896551724137931
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Fideo Mega Lonchys Pollo Vaso 107 Gr.                                                                                                                                                                                                                     ",
+        "share_producto_top": "6.9%",
+        "categorias_actuales": 27
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 2,
+        "target_frecuencia": 3
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Fideo Mega Lonchys Pollo Vaso 107 Gr.                                                                                                                                                                                                                     "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Fideo Mega Lonchys Pollo Vaso 107 Gr.                                                                                                                                                                                                                     ",
+          "Coca - Cola"
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

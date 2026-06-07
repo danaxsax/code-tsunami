@@ -1,0 +1,51 @@
+{
+  "customer_id": "1.34731E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 2,
+    "ticket_promedio": 0.0,
+    "score_nicho": 0.14285714285714285
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Sal Crisal Yodada Fluorada Funda 2Kg /2000 Gr.                                                                                                                                                                                                            ",
+        "share_producto_top": "14.3%",
+        "categorias_actuales": 7
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 2,
+        "target_frecuencia": 3
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Sal Crisal Yodada Fluorada Funda 2Kg /2000 Gr.                                                                                                                                                                                                            "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Sal Crisal Yodada Fluorada Funda 2Kg /2000 Gr.                                                                                                                                                                                                            ",
+          "Yogurt Mix Frutilla con Hojuelas 180 Gr.                                                                                                                                                                                                                  "
+        ]
+      }
+    }
+  ],
+  "pais": "Perú"
+}

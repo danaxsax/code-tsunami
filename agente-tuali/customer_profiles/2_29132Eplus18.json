@@ -1,0 +1,51 @@
+{
+  "customer_id": "2.29132E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 44.25,
+    "score_nicho": 0.5
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "En Del Valle Naranja 24UN 950ML",
+        "share_producto_top": "50.0%",
+        "categorias_actuales": 2
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "En Del Valle Naranja 24UN 950ML"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "En Del Valle Naranja 24UN 950ML",
+          "En Monster 2UN 473ML"
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

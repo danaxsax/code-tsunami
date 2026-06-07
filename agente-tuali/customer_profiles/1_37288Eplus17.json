@@ -1,0 +1,51 @@
+{
+  "customer_id": "1.37288E+17",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 42.96,
+    "score_nicho": 0.16666666666666666
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "En Powerade Frutas 6UN 350ML & Powerade Manzana 6UN 350ML & Powerade Mora 6UN 1L",
+        "share_producto_top": "16.7%",
+        "categorias_actuales": 6
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "En Powerade Frutas 6UN 350ML & Powerade Manzana 6UN 350ML & Powerade Mora 6UN 1L"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "En Powerade Frutas 6UN 350ML & Powerade Manzana 6UN 350ML & Powerade Mora 6UN 1L",
+          "En Powerade Manzana (6UN 1L - 6UN 350ML) & Powerade Mora 6UN 350ML"
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

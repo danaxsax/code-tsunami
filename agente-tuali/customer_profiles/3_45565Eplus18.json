@@ -1,0 +1,51 @@
+{
+  "customer_id": "3.45565E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 252.01,
+    "score_nicho": 0.25
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Atole Maízena de Vainilla 47 gr / Sobre",
+        "share_producto_top": "25.0%",
+        "categorias_actuales": 5
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Atole Maízena de Vainilla 47 gr / Sobre"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Atole Maízena de Vainilla 47 gr / Sobre",
+          "Atole Maízena de Fresa 47 gr / Sobre"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

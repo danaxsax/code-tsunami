@@ -1,0 +1,51 @@
+{
+  "customer_id": "2.11962E+18",
+  "perfil": "VIP",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 8650.96,
+    "score_nicho": 0.11904761904761904
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Valle Frut Citrus Punch",
+        "share_producto_top": "11.9%",
+        "categorias_actuales": 27
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Baja",
+        "top_sku_para_promo": "Valle Frut Citrus Punch"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Valle Frut Citrus Punch",
+          "Del Valle Mango"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}
