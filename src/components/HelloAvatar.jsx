@@ -8,8 +8,9 @@ const HELLO_MS = 10000
 
 export default function HelloAvatar({ onClick, phrases = ['¿Necesitas ayuda? Pregúntale a la IA'] }) {
   const lottieRef = useRef(null)
-  // phase: 'move' (sin texto, 5s)  |  'hello' (con texto, 10s)
-  const [phase, setPhase] = useState('move')
+  // El ciclo empieza en 'hello' (con frase, 10s) y luego pasa a 'move' (puntos suspensivos, 5s)
+  // phase: 'hello' (con frase, 10s)  |  'move' (puntos suspensivos, 5s)
+  const [phase, setPhase] = useState('hello')
   // índice de la frase actual; avanza cada vez que entramos a la fase 'hello'
   const [phraseIndex, setPhraseIndex] = useState(0)
 
@@ -40,8 +41,8 @@ export default function HelloAvatar({ onClick, phrases = ['¿Necesitas ayuda? Pr
         onDOMLoaded={() => lottieRef.current?.setSpeed(2.5)}
         style={{ width: 64, height: 64 }}
       />
-      <span className={`hello-avatar-text ${isHello ? 'show' : ''}`}>
-        {phrases[phraseIndex]}
+      <span className={`hello-avatar-text ${isHello ? 'show' : 'dots'}`}>
+        {isHello ? phrases[phraseIndex] : '...'}
       </span>
     </button>
   )

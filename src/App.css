@@ -337,6 +337,12 @@ body {
   opacity: 1;
   transform: translateX(0);
 }
+.hello-avatar-text.dots {
+  max-width: 40px;
+  opacity: 1;
+  transform: translateX(0);
+  letter-spacing: 2px;
+}
 .points-warn {
   background: #fdf3d6;
   color: #7a5a12;
