@@ -1002,22 +1002,74 @@ export default function MiMeta({ onAvatarClick }) {
                 X
               </button>
             </div>
-            <div className="upload-content" style={{ padding: '16px' }}>
-              <div className="ranking-list">
-                {competition.ranking.map((item, index) => (
-                  <div className={`ranking-row ${item.me ? 'me' : ''}`} key={`${item.store}-full-${index}`}>
-                    <span className="ranking-pos">{index + 1}</span>
-                    <div style={{ textAlign: 'left' }}>
-                      <strong>{item.me ? item.store : `Competidor ${index + 1}`}</strong>
-                      <small style={{ color: 'var(--muted)', fontSize: '11px' }}>Progreso del reto</small>
-                    </div>
-                    <b style={{ fontSize: '15px' }}>{item.progress}%</b>
+            <div className="upload-content" style={{ padding: '0', backgroundColor: '#f5f5f7' }}>
+              <div className="podium-section">
+                {/* 2nd Place */}
+                <div className="podium-item second">
+                  <div className="podium-avatar-shell">
+                    <div className="podium-avatar">🏪</div>
                   </div>
-                ))}
+                  <div className="podium-name">{competition.ranking[1]?.me ? competition.ranking[1].store : `Competidor 2`}</div>
+                  <div className="podium-block">
+                    <div className="podium-score-pill">★ {competition.ranking[1]?.progress}</div>
+                    <span className="podium-number">2</span>
+                  </div>
+                </div>
+
+                {/* 1st Place */}
+                <div className="podium-item first">
+                  <div className="podium-avatar-shell">
+                    <span className="podium-crown">👑</span>
+                    <div className="podium-avatar">🏪</div>
+                  </div>
+                  <div className="podium-name">{competition.ranking[0]?.me ? competition.ranking[0].store : `Competidor 1`}</div>
+                  <div className="podium-block">
+                    <div className="podium-score-pill">★ {competition.ranking[0]?.progress}</div>
+                    <span className="podium-number">1</span>
+                  </div>
+                </div>
+
+                {/* 3rd Place */}
+                <div className="podium-item third">
+                  <div className="podium-avatar-shell">
+                    <div className="podium-avatar">🏪</div>
+                  </div>
+                  <div className="podium-name">{competition.ranking[2]?.me ? competition.ranking[2].store : `Competidor 3`}</div>
+                  <div className="podium-block">
+                    <div className="podium-score-pill">★ {competition.ranking[2]?.progress}</div>
+                    <span className="podium-number">3</span>
+                  </div>
+                </div>
               </div>
-              <button className="upload-submit-btn" onClick={() => setShowFullRanking(false)} style={{ marginTop: '16px' }}>
-                Cerrar
-              </button>
+
+              <div className="leaderboard-chart-container">
+                <h4>Clasificación General</h4>
+                <div className="leaderboard-chart">
+                  {competition.ranking.slice(3).map((item, index) => (
+                    <div className={`leaderboard-item ${item.me ? 'me' : ''}`} key={`${item.store}-rest-${index}`}>
+                      <div className="leaderboard-label-row">
+                        <div className="leaderboard-name">
+                          <span className="leaderboard-rank">{index + 4}</span>
+                          {item.me ? item.store : `Competidor ${index + 4}`}
+                        </div>
+                        <span className="leaderboard-value">★ {item.progress}</span>
+                      </div>
+                      <div className="leaderboard-bar-track">
+                        <div
+                          className="leaderboard-bar-fill"
+                          style={{ width: `${item.progress}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ padding: '24px 18px 30px', backgroundColor: '#fff' }}>
+                <button className="upload-submit-btn" onClick={() => setShowFullRanking(false)} style={{ width: '100%', margin: '0' }}>
+                  Cerrar
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1133,7 +1185,7 @@ export default function MiMeta({ onAvatarClick }) {
                 X
               </button>
             </div>
-            <div className="upload-content">
+            <div className="upload-content" style={{ padding: '24px', gap: '20px' }}>
               <p>Sube aqui una foto de tu cartel</p>
               <div className="upload-dropzone">
                 <span>📁</span>
