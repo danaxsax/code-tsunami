@@ -526,3 +526,18 @@ body {
 .tab.active { color: var(--wine); }
 .tab .tab-icon svg { opacity: 0.45; transition: opacity .15s; }
 .tab.active .tab-icon svg { opacity: 1; }
+
+
+.cat-image {
+  object-fit: contain;
+}
+
+.valle-img {
+  width: 70%;
+  height: 70%;
+}
+
+.monster-img {
+  width: 45%;
+  height: 45%;
+}
