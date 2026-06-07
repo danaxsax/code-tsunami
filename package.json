@@ -27,5 +27,12 @@
     "concurrently": "^10.0.3",
     "constructs": "^10.0.0",
     "vite": "^6.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "core-js",
+      "esbuild"
+    ]
   }
 }
