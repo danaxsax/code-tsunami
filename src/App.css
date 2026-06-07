@@ -325,6 +325,17 @@ body {
   font-size: 13px;
   font-weight: 600;
   color: var(--wine);
+  line-height: 1.3;
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: max-width 0.45s ease, opacity 0.35s ease, transform 0.45s ease;
+}
+.hello-avatar-text.show {
+  max-width: 320px;
+  opacity: 1;
+  transform: translateX(0);
 }
 .points-warn {
   background: #fdf3d6;

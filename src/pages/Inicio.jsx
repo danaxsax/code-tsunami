@@ -6,7 +6,16 @@ import tetrapack from '../../assets/tetrapack.png'
 export default function Inicio({ onAvatarClick }) {
   return (
     <>
-      <HelloAvatar onClick={onAvatarClick} />
+      <HelloAvatar
+        onClick={onAvatarClick}
+        phrases={[
+          '¿Quieres que descubramos tu potencial?',
+          'Te ayudo a armar tu pedido',
+          '¿Quieres crecer tu negocio? ¡yo te ayudo!',
+          'Ahorra con las promociones, ¡yo te guío!',
+          'Soy Ali, tu aliado de confianza',
+        ]}
+      />
       <div className="pos-bar">
         <div>
           <div className="pos-label">Punto de venta</div>

@@ -43,7 +43,15 @@ export default function Pedidos({ onAvatarClick }) {
 
   return (
     <div className="panel-pad">
-      <HelloAvatar onClick={onAvatarClick} />
+      <HelloAvatar
+        onClick={onAvatarClick}
+        phrases={[
+          '¿Cuál fue la experiencia de tu último pedido?',
+          'Tu próxima entrega es el 10 de junio',
+          'Tu promotor te visitará mañana',
+          '¿Te sugiero un pedido?',
+        ]}
+      />
       <h2 className="section-title">Pedidos Coca-Cola</h2>
 
       <div className="pedidos-banners">

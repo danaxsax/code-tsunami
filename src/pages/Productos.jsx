@@ -29,7 +29,15 @@ export default function Productos({ onAvatarClick }) {
 
   return (
     <div className="panel-pad">
-      <HelloAvatar onClick={onAvatarClick} />
+      <HelloAvatar
+        onClick={onAvatarClick}
+        phrases={[
+          'Dime, ¿qué buscas?',
+          '¿Algo refrescante? ¡mira este producto!',
+          'Encuentro lo que necesites',
+          '¿Cómo ganar más? ¡yo te cuento!',
+        ]}
+      />
       <h2 className="section-title">Categorías</h2>
       <div className="cat-grid">
         {categorias.map((cat, i) => (
