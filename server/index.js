@@ -11,6 +11,7 @@ const profilesDir = path.join(rootDir, 'agente-tuali', 'Casos Principales')
 
 const app = express()
 const PORT = Number(process.env.AGENT_SERVER_PORT || 8787)
+const ELEVENLABS_AGENT_ID = process.env.ELEVENLABS_AGENT_ID || process.env.VITE_ELEVENLABS_AGENT_ID || ''
 
 app.use(express.json({ limit: '1mb' }))
 
@@ -167,6 +168,25 @@ function elevenLabsApiKey() {
   return process.env.ELEVENLABS_API_KEY || process.env.VITE_ELEVENLABS_KEY || ''
 }
 
+async function elevenLabsConvaiRequest(pathname, agentId) {
+  const apiKey = elevenLabsApiKey()
+  if (!apiKey) throw new Error('Missing ELEVENLABS_API_KEY')
+
+  const selectedAgentId = agentId || ELEVENLABS_AGENT_ID
+  if (!selectedAgentId) throw new Error('Missing ELEVENLABS_AGENT_ID')
+
+  const url = new URL(`https://api.elevenlabs.io/v1/convai/conversation/${pathname}`)
+  url.searchParams.set('agent_id', selectedAgentId)
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: { 'xi-api-key': apiKey },
+  })
+
+  if (!response.ok) throw new Error(`ElevenLabs ConvAI error ${response.status}: ${await response.text()}`)
+  return response.json()
+}
+
 function voiceForProfile({ cluster, country } = {}) {
   const clusterKey = envSuffix(cluster)
   const countryKey = envSuffix(country || 'mexico')
@@ -229,7 +249,28 @@ app.get('/api/health', (_req, res) => {
     ok: true,
     provider: process.env.LLM_PROVIDER || 'openai',
     elevenlabs: Boolean(elevenLabsApiKey()),
+    elevenlabsAgent: Boolean(ELEVENLABS_AGENT_ID),
   })
+})
+
+app.get('/api/elevenlabs/signed-url', async (req, res) => {
+  try {
+    const data = await elevenLabsConvaiRequest('get-signed-url', req.query.agent_id)
+    res.json({ signedUrl: data.signed_url })
+  } catch (error) {
+    console.error('[elevenlabs signed-url]', error)
+    res.status(500).json({ error: error.message || 'Failed to get signed URL' })
+  }
+})
+
+app.get('/api/elevenlabs/conversation-token', async (req, res) => {
+  try {
+    const data = await elevenLabsConvaiRequest('token', req.query.agent_id)
+    res.json({ conversationToken: data.token })
+  } catch (error) {
+    console.error('[elevenlabs conversation-token]', error)
+    res.status(500).json({ error: error.message || 'Failed to get conversation token' })
+  }
 })
 
 app.post('/api/agent', async (req, res) => {
