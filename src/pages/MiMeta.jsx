@@ -325,11 +325,73 @@ function buildAchievements({ acceptedCount, customGoalsCount, completedSocialCou
   ]
 }
 
+function buildGoalPath(selectedGoal, profile) {
+  const title = selectedGoal?.title || selectedGoal?.tipo || 'Meta de crecimiento'
+  const topGoal = normalizeText(title)
+  const ticket = Number(profile.metricas_base?.ticket_promedio) || 0
+  const frequency = profile.metricas_base?.frecuencia || 1
+
+  const pathLibrary = {
+    'Aumentar promedio de ticket': [
+      { label: 'Diagnostica', detail: `Ticket actual: ${money(ticket)}. Detecta productos que ya compra seguido.`, reward: '+8 pts', status: 'done' },
+      { label: 'Arma combo', detail: 'Crea un combo con producto principal y complemento de alta rotacion.', reward: '+14 pts', status: 'active' },
+      { label: 'Agrega al pedido', detail: 'Suma el combo al carrito sugerido y revisa que el margen siga sano.', reward: '+18 pts', status: 'locked' },
+      { label: 'Mide impacto', detail: 'Compara el ticket del siguiente pedido contra el objetivo semanal.', reward: '+22 pts', status: 'locked' },
+    ],
+    'Subir ticket promedio': [
+      { label: 'Diagnostica', detail: `Ticket actual: ${money(ticket)}. Detecta productos que ya compra seguido.`, reward: '+8 pts', status: 'done' },
+      { label: 'Arma combo', detail: 'Crea un combo con producto principal y complemento de alta rotacion.', reward: '+14 pts', status: 'active' },
+      { label: 'Agrega al pedido', detail: 'Suma el combo al carrito sugerido y revisa que el margen siga sano.', reward: '+18 pts', status: 'locked' },
+      { label: 'Mide impacto', detail: 'Compara el ticket del siguiente pedido contra el objetivo semanal.', reward: '+22 pts', status: 'locked' },
+    ],
+    Diversificacion: [
+      { label: 'Encuentra riesgo', detail: 'Ubica el producto que concentra mas ventas del perfil.', reward: '+8 pts', status: 'done' },
+      { label: 'Elige categoria', detail: 'Selecciona una categoria cercana para no cambiar la rutina de compra.', reward: '+14 pts', status: 'active' },
+      { label: 'Prueba surtido', detail: 'Agrega 2 SKUs pequenos y mide si rotan esta semana.', reward: '+18 pts', status: 'locked' },
+      { label: 'Consolida', detail: 'Mantiene los productos que funcionaron y retira los de baja salida.', reward: '+22 pts', status: 'locked' },
+    ],
+    'Incrementar Pedidos': [
+      { label: 'Agenda', detail: `Frecuencia actual: ${frequency}. Programa el siguiente pedido recomendado.`, reward: '+8 pts', status: 'done' },
+      { label: 'Recordatorio', detail: 'Activa un aviso antes del dia de recompra con carrito precargado.', reward: '+14 pts', status: 'active' },
+      { label: 'Pedido rapido', detail: 'Confirma basicos y agrega una promocion de baja friccion.', reward: '+18 pts', status: 'locked' },
+      { label: 'Racha', detail: 'Completa 2 pedidos seguidos sin dejar pasar la semana objetivo.', reward: '+22 pts', status: 'locked' },
+    ],
+    'Aplicar Promociones': [
+      { label: 'Detecta promo', detail: 'Elige una promocion que ya coincide con el historial de compra.', reward: '+8 pts', status: 'done' },
+      { label: 'Calcula ahorro', detail: 'Revisa ahorro, puntos y productos que conviene sumar.', reward: '+14 pts', status: 'active' },
+      { label: 'Aplica', detail: 'Activa la promo en el pedido sugerido.', reward: '+18 pts', status: 'locked' },
+      { label: 'Repite', detail: 'Guarda la promocion si sube recompra o margen.', reward: '+22 pts', status: 'locked' },
+    ],
+    'Crear Combos': [
+      { label: 'Pareja ideal', detail: 'Une los dos productos frecuentes del JSON del usuario.', reward: '+8 pts', status: 'done' },
+      { label: 'Precio claro', detail: 'Define un precio facil de comunicar en mostrador.', reward: '+14 pts', status: 'active' },
+      { label: 'Promociona', detail: 'Sube foto o TikTok del combo para atraer clientes.', reward: '+18 pts', status: 'locked' },
+      { label: 'Escala', detail: 'Convierte el combo en reto semanal si mejora el ticket.', reward: '+22 pts', status: 'locked' },
+    ],
+    Activacion: [
+      { label: 'Reengancha', detail: 'Identifica el gancho comercial para volver a comprar.', reward: '+8 pts', status: 'done' },
+      { label: 'Oferta simple', detail: 'Muestra una oferta pequena con productos conocidos.', reward: '+14 pts', status: 'active' },
+      { label: 'Primer pedido', detail: 'Completa una recompra sin subir demasiado la inversion.', reward: '+18 pts', status: 'locked' },
+      { label: 'Habito', detail: 'Convierte la recompra en recordatorio semanal.', reward: '+22 pts', status: 'locked' },
+    ],
+  }
+
+  return pathLibrary[topGoal] || [
+    { label: 'Define', detail: selectedGoal?.objective || 'Convierte la meta en una accion medible.', reward: '+8 pts', status: 'done' },
+    { label: 'Primer paso', detail: 'El agente sugiere una accion pequena para iniciar hoy.', reward: '+14 pts', status: 'active' },
+    { label: 'Comprueba', detail: 'Revisa avance, puntos y efecto en el pedido.', reward: '+18 pts', status: 'locked' },
+    { label: 'Completa', detail: 'Cierra la meta y desbloquea un achievement.', reward: '+22 pts', status: 'locked' },
+  ]
+}
+
 export default function MiMeta({ onAvatarClick }) {
   const [accepted, setAccepted] = useState(['Combo inteligente'])
   const [feedback, setFeedback] = useState('')
   const [socialMissions, setSocialMissions] = useState(socialMissionSeed)
   const [showTikTokFeed, setShowTikTokFeed] = useState(false)
+  const [selectedGoalPath, setSelectedGoalPath] = useState(null)
+  const [pathCoach, setPathCoach] = useState('')
+  const [isPathCoachLoading, setIsPathCoachLoading] = useState(false)
   const [customGoals, setCustomGoals] = useState([])
   const [customDraft, setCustomDraft] = useState({
     type: 'Subir ticket promedio',
@@ -408,6 +470,40 @@ export default function MiMeta({ onAvatarClick }) {
     }
   }
 
+  async function openGoalPath(selectedGoal) {
+    const goalTitle = selectedGoal.title || selectedGoal.tipo || 'Meta de crecimiento'
+    const steps = buildGoalPath(selectedGoal, profile)
+    setSelectedGoalPath({ ...selectedGoal, title: goalTitle, steps })
+    setPathCoach('El agente esta preparando tu siguiente movimiento.')
+    setIsPathCoachLoading(true)
+
+    try {
+      const response = await fetch('/api/agent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: `Dame un mensaje corto para guiarme en la meta "${goalTitle}". Enfocate en el siguiente paso: "${steps.find((step) => step.status === 'active')?.label}".`,
+          history: [],
+          customerProfile: localStorage.getItem('tuali_customer_profile') || import.meta.env.VITE_CUSTOMER_PROFILE || DEFAULT_PROFILE_FILE,
+          metaState: {
+            screen: 'Mi Meta',
+            selectedGoal: goalTitle,
+            nextStep: steps.find((step) => step.status === 'active'),
+            cluster: profile.perfil,
+          },
+          includeAudio: false,
+        }),
+      })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.error || 'Agent unavailable')
+      setPathCoach(data.reply)
+    } catch {
+      setPathCoach(`Empieza por "${steps.find((step) => step.status === 'active')?.label}". Tuali te acompana con una accion pequena y medible para avanzar hoy.`)
+    } finally {
+      setIsPathCoachLoading(false)
+    }
+  }
+
   return (
     <div className="panel-pad goal-screen">
       <HelloAvatar onClick={onAvatarClick} />
@@ -438,6 +534,9 @@ export default function MiMeta({ onAvatarClick }) {
             <strong>{goal.missing}</strong>
           </div>
         </div>
+        <button className="goal-path-cta" onClick={() => openGoalPath(goal)}>
+          Ver camino de pasos
+        </button>
       </section>
 
       <section className="goal-impact">
@@ -469,13 +568,18 @@ export default function MiMeta({ onAvatarClick }) {
           {plan.goals.slice(0, 5).map((item) => {
             const meta = getGoalMeta(item)
             return (
-              <div className="generated-goal-pill" key={`${item.tipo}-${item.prioridad}`} style={{ '--goal-color': meta.color }}>
+              <button
+                className="generated-goal-pill"
+                key={`${item.tipo}-${item.prioridad}`}
+                style={{ '--goal-color': meta.color }}
+                onClick={() => openGoalPath({ ...item, title: item.tipo })}
+              >
                 <span>{meta.icon}</span>
                 <div>
                   <strong>{item.tipo}</strong>
                   <small>Prioridad {item.prioridad}</small>
                 </div>
-              </div>
+              </button>
             )
           })}
         </div>
@@ -512,6 +616,9 @@ export default function MiMeta({ onAvatarClick }) {
                 <div className="mission-actions">
                   <button className="mission-primary" onClick={() => toggleRecommendation(rec.tag)}>
                     {isAccepted ? 'Quitar' : 'Agregar al pedido'}
+                  </button>
+                  <button className="mission-path" onClick={() => openGoalPath({ ...rec, title: rec.tag, objective: rec.impact })}>
+                    Ver pasos
                   </button>
                   <button className="mission-secondary" onClick={() => setFeedback('Tuali bajara inversion inicial y ajustara futuras recomendaciones.')}>
                     No me interesa
@@ -581,6 +688,9 @@ export default function MiMeta({ onAvatarClick }) {
               </div>
               <button onClick={() => activateCustomGoal(item.id)}>
                 {item.active ? 'Activa' : 'Activar'}
+              </button>
+              <button className="custom-goal-path-button" onClick={() => openGoalPath(item)}>
+                Pasos
               </button>
             </article>
           ))}
@@ -736,6 +846,52 @@ export default function MiMeta({ onAvatarClick }) {
                     <a href={participant.url} target="_blank" rel="noreferrer">
                       Ver TikTok
                     </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectedGoalPath && (
+        <div className="goal-map-overlay" role="dialog" aria-modal="true" aria-label="Camino de meta">
+          <div className="goal-map-shell">
+            <div className="goal-map-topbar">
+              <div>
+                <span>Camino de meta</span>
+                <strong>{selectedGoalPath.title}</strong>
+              </div>
+              <button onClick={() => setSelectedGoalPath(null)} aria-label="Cerrar camino">
+                X
+              </button>
+            </div>
+
+            <div className="goal-map-banner">
+              <span>Reto {profile.perfil}</span>
+              <strong>2/4 pasos</strong>
+            </div>
+
+            <div className="goal-map-coach">
+              <span>IA</span>
+              <p>{isPathCoachLoading ? 'Calculando el siguiente movimiento...' : pathCoach}</p>
+            </div>
+
+            <div className="goal-map-road">
+              {selectedGoalPath.steps.map((step, index) => (
+                <article className={`goal-map-node ${step.status}`} key={`${step.label}-${index}`}>
+                  <div className="goal-map-dot">
+                    <span>{index + 1}</span>
+                  </div>
+                  <div className="goal-map-card">
+                    <small>{step.reward}</small>
+                    <h3>{step.label}</h3>
+                    <p>{step.detail}</p>
+                    {step.status === 'active' && (
+                      <button onClick={() => setFeedback(`Siguiente paso activado: ${step.label}.`)}>
+                        Iniciar paso
+                      </button>
+                    )}
                   </div>
                 </article>
               ))}
