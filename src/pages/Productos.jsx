@@ -57,7 +57,7 @@ export default function Productos({ onAvatarClick }) {
       <div className="subtotal-bar">
         <div>
           <div className="label">Subtotal :</div>
-          <div className="amount">$2,239.49</div>
+          <div className="amount">$1,369.49</div>
         </div>
         <span className="link">Ver descuentos &rsaquo;</span>
       </div>
