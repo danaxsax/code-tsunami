@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import HelloAvatar from '../components/HelloAvatar.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 import pedidoIcon from '../../assets/pedido.png'
@@ -10,6 +10,7 @@ import sieteDiasIcon from '../../assets/7 dias.png'
 import promoIcon from '../../assets/promo.png'
 import surtidoIcon from '../../assets/surtido.png'
 import topIcon from '../../assets/top.png'
+import { speak, stopSpeaking } from '../services/tts.js'
 import vipProfile from '../../agente-tuali/Casos Principales/1_0012Eplus18.json'
 import nicheProfile from '../../agente-tuali/Casos Principales/1_00004Eplus18.json'
 import recurrentProfile from '../../agente-tuali/Casos Principales/3_87064Eplus17.json'
@@ -25,6 +26,7 @@ const profileModules = {
 }
 
 const DEFAULT_PROFILE_FILE = '1_0012Eplus18'
+const pathStepImages = [metaIcon, pedidoIcon, comboIcon, promoIcon, socialIcon, surtidoIcon, topIcon]
 
 const goalCatalog = {
   'Aumentar promedio de ticket': {
@@ -72,55 +74,55 @@ const goalCatalog = {
 
 const goalRoadmaps = {
   'Aumentar promedio de ticket': [
-    { label: 'Analizar complementarios', desc: 'Revisa que productos se compran juntos con frecuencia.' },
-    { label: 'Crear combos sugeridos', desc: 'Arma paquetes que ofrezcan valor real al cliente.' },
-    { label: 'Capacitacion de venta', desc: 'Entrena a tu equipo para ofrecer el combo en caja.' },
-    { label: 'Medir ticket promedio', desc: 'Compara el valor antes y despues de los combos.' },
-    { label: 'Optimizar oferta', desc: 'Ajusta los combos que mejor rotacion tuvieron.' },
+    { label: 'Mira que se vende junto', desc: 'Revisa que productos suelen llevar tus clientes en el mismo pedido.' },
+    { label: 'Arma un combo facil', desc: 'Junta productos que hagan sentido, como refresco con botana.' },
+    { label: 'Ofrecelo en caja', desc: 'Cuando cobres, menciona el combo con una frase corta.' },
+    { label: 'Revisa si subio el pedido', desc: 'Compara si tus clientes estan comprando un poco mas.' },
+    { label: 'Repite lo que funciono', desc: 'Deja fijo el combo que mas se venda.' },
   ],
   Diversificacion: [
-    { label: 'Identificar huecos', desc: 'Busca categorias que tus clientes piden pero no tienes.' },
-    { label: 'Seleccion de SKUs', desc: 'Elige 3 productos estrella de la nueva categoria.' },
-    { label: 'Exhibicion premium', desc: 'Ubica los productos en el area de mayor flujo.' },
-    { label: 'Promocion de lanzamiento', desc: 'Ofrece una pequeña prueba o descuento inicial.' },
-    { label: 'Analisis de rotacion', desc: 'Verifica si la categoria se vuelve autosustentable.' },
+    { label: 'Busca lo que falta', desc: 'Piensa que productos te piden y todavia no tienes.' },
+    { label: 'Elige pocos productos', desc: 'Empieza con 2 o 3 productos para probar.' },
+    { label: 'Ponlos donde se vean', desc: 'Ubica los productos cerca del mostrador o donde pase mas gente.' },
+    { label: 'Haz una promo pequena', desc: 'Ofrece una prueba o descuento sencillo.' },
+    { label: 'Revisa si se venden', desc: 'Si se venden bien, dejalos en tu tienda.' },
   ],
   'Incrementar Pedidos': [
-    { label: 'Auditoria de stock', desc: 'Haz un conteo rapido de tus productos de alta rotacion.' },
-    { label: 'Configurar alertas', desc: 'Activa recordatorios 2 dias antes de agotar stock.' },
-    { label: 'Pedido anticipado', desc: 'Realiza tu orden antes del pico de demanda semanal.' },
-    { label: 'Verificar recepcion', desc: 'Asegura que todo llego en tiempo y forma.' },
-    { label: 'Evaluacion de ahorro', desc: 'Revisa cuanto ganaste al no perder ventas por falta de stock.' },
+    { label: 'Cuenta tus basicos', desc: 'Revisa rapido que no falte lo que mas vendes.' },
+    { label: 'Pon un recordatorio', desc: 'Pide antes de quedarte sin producto.' },
+    { label: 'Haz pedido con tiempo', desc: 'Ordena antes del dia fuerte de ventas.' },
+    { label: 'Revisa que llego todo', desc: 'Confirma que tu pedido llego completo.' },
+    { label: 'Evita ventas perdidas', desc: 'Mide cuanto vendiste por tener producto disponible.' },
   ],
   'Aplicar Promociones': [
-    { label: 'Revisar catalogo', desc: 'Encuentra las promos vigentes de tus proveedores.' },
-    { label: 'Calcular margen', desc: 'Asegura que la promo sea rentable para tu negocio.' },
-    { label: 'Señaletica clara', desc: 'Coloca carteles con el precio anterior y el de promo.' },
-    { label: 'Comunicacion directa', desc: 'Avisa a tus clientes mas leales sobre la oferta.' },
-    { label: 'Validar exito', desc: 'Mide cuantas unidades extra vendiste gracias a la promo.' },
+    { label: 'Elige una promo buena', desc: 'Escoge una oferta de productos que tus clientes si compran.' },
+    { label: 'Revisa tu ganancia', desc: 'Confirma que la promo todavia te deje dinero.' },
+    { label: 'Pon un cartel claro', desc: 'Coloca un cartel facil de leer.' },
+    { label: 'Avisale a tus clientes', desc: 'Cuentales la promo por WhatsApp o en la tienda.' },
+    { label: 'Mira si vendiste mas', desc: 'Revisa si vendiste mas piezas que antes.' },
   ],
   'Crear Combos': [
-    { label: 'Analisis de afinidad', desc: 'Identifica que productos "llaman" a otros.' },
-    { label: 'Estrategia de precio', desc: 'Define un precio que sea menor a la suma individual.' },
-    { label: 'Empaque visual', desc: 'Usa ligas o bolsas para que el combo se vea como uno solo.' },
-    { label: 'Impulso en mostrador', desc: 'Manten 5 combos listos para entrega inmediata.' },
-    { label: 'Rotacion de combos', desc: 'Cambia los productos cada 15 dias para mantener el interes.' },
+    { label: 'Junta productos amigos', desc: 'Elige productos que se antojan juntos, como bebida y botana.' },
+    { label: 'Pon precio atractivo', desc: 'Haz que el combo se sienta conveniente para el cliente.' },
+    { label: 'Que se vea armado', desc: 'Usa ligas o bolsas para que el combo se vea como uno solo.' },
+    { label: 'Ten combos listos', desc: 'Manten algunos combos preparados cerca del mostrador.' },
+    { label: 'Cambia el combo', desc: 'Prueba otro combo cada 15 dias para mantener el interes.' },
   ],
   Activacion: [
-    { label: 'Listado de inactivos', desc: 'Identifica quienes no han comprado en 15 dias.' },
-    { label: 'Oferta gancho', desc: 'Prepara un beneficio exclusivo para su regreso.' },
-    { label: 'Contacto multicanal', desc: 'Usa WhatsApp o visitas para recordarles tu tienda.' },
-    { label: 'Primer pedido', desc: 'Asegura una experiencia perfecta en su compra de regreso.' },
-    { label: 'Fidelizacion', desc: 'Sigue su comportamiento para evitar que se vuelvan a alejar.' },
+    { label: 'Mira quien dejo de venir', desc: 'Piensa que clientes antes venian seguido y ya no han vuelto.' },
+    { label: 'Prepara un beneficio', desc: 'Dales una razon sencilla para regresar.' },
+    { label: 'Mandales mensaje', desc: 'Usa WhatsApp o invitalos cuando pasen cerca.' },
+    { label: 'Cuida su regreso', desc: 'Asegura que encuentren lo que necesitan.' },
+    { label: 'Haz que vuelvan', desc: 'Si regresan, ofrece algo para su siguiente visita.' },
   ],
 }
 
 const profileCopy = {
-  VIP: 'Compra con alto valor. El agente prioriza ticket promedio, combos y promociones de mayor impacto.',
-  Recurrente: 'Compra con frecuencia. El agente prioriza diversificacion y nuevas oportunidades de surtido.',
-  Nicho: 'Tiene alta concentracion en pocos productos. El agente prioriza diversificacion y cross-sell.',
-  Ocasional: 'Compra poco o dejo pasar varios dias. El agente prioriza activacion y recompra facil.',
-  Volumen: 'Tiene potencial de aumentar frecuencia. El agente prioriza pedidos programados y promociones.',
+  VIP: 'Tus pedidos suelen ser buenos. Tuali te ayuda a vender un poco mas en cada pedido.',
+  Recurrente: 'Compras seguido. Tuali te ayuda a encontrar productos nuevos sin cambiar tu rutina.',
+  Nicho: 'Vendes mucho de pocos productos. Tuali te ayuda a sumar opciones sin arriesgar de mas.',
+  Ocasional: 'Compras de vez en cuando. Tuali te ayuda a retomar pedidos faciles.',
+  Volumen: 'Puedes pedir con mas orden. Tuali te ayuda a no quedarte sin tus basicos.',
 }
 
 const customGoalTypes = [
@@ -364,17 +366,17 @@ function buildGoalPlan(profile) {
       tag: related.combo ? 'Combo inteligente' : 'Accion principal',
       title: related.combo ? `${comboProducts[0]} + ${comboProducts[1]}` : `Impulsa ${topSku}`,
       reason: related.combo
-        ? `El perfil ${profile.perfil} ya compra estos productos. El agente los une para subir el pedido sin cambiar la rutina.`
-        : `El agente detecto que ${topSku} concentra la oportunidad principal de crecimiento.`,
-      impact: ticket ? `+${money(ticket * 0.07)} al ticket` : '+1 accion de crecimiento',
+        ? `Estos productos ya se compran seguido. Juntarlos ayuda a que el pedido suba sin cambiar mucho tu rutina.`
+        : `${topSku} es una buena oportunidad para vender un poco mas esta semana.`,
+      impact: ticket ? `+${money(ticket * 0.07)} por pedido` : '+1 accion sencilla',
       points: '+16 puntos',
     },
     {
       tag: related.diversification ? 'Diversificacion' : 'Surtido',
       title: `Reduce dependencia de ${topSku}`,
       reason: related.diversification
-        ? `Hoy ${topSku} representa ${related.diversification.datos_asociados.share_producto_top}. La meta es abrir categorias sin perder tus basicos.`
-        : 'El agente busca productos cercanos a tu historial para ampliar el surtido con bajo riesgo.',
+        ? `Hoy vendes mucho de ${topSku}. Prueba sumar otros productos sin dejar tus basicos.`
+        : 'Tuali te sugiere productos parecidos a lo que ya vendes para probar sin arriesgar de mas.',
       impact: `de ${categories} a ${Number(categories) + 2} categorias`,
       points: '+14 puntos',
     },
@@ -382,8 +384,8 @@ function buildGoalPlan(profile) {
       tag: related.promotion ? 'Promocion aplicada' : 'Siguiente pedido',
       title: related.promotion ? `Promo en ${normalizeText(related.promotion.datos_asociados.top_sku_para_promo)}` : `Programa pedido ${targetFrequency}`,
       reason: related.promotion
-        ? `Sensibilidad al precio: ${normalizeText(related.promotion.datos_asociados.sensibilidad_precio)}. La promo se aplica donde mas probabilidad hay de recompra.`
-        : `Frecuencia actual: ${frequency}. Objetivo del agente: llegar a ${targetFrequency} pedidos.`,
+        ? 'Esta promo puede ayudar a que tus clientes vuelvan por un producto que ya conocen.'
+        : `Hoy haces ${frequency} pedido. La idea es llegar a ${targetFrequency} sin quedarte sin producto.`,
       impact: related.frequency ? `${frequency} a ${targetFrequency} pedidos` : '+12% recompra',
       points: '+12 puntos',
     },
@@ -428,57 +430,61 @@ function buildGoalPath(selectedGoal, profile) {
   const ticket = Number(profile.metricas_base?.ticket_promedio) || 0
   const frequency = profile.metricas_base?.frecuencia || 1
 
+  const ticketCopy = [
+    { label: 'Mira que se vende junto', detail: `Tu pedido promedio va en ${money(ticket)}. Revisa que productos suelen llevar juntos tus clientes, como agua con botana o refresco con snack.`, reward: '+8 pts', status: 'done' },
+    { label: 'Arma una promo sencilla', detail: 'Haz una oferta facil de entender, por ejemplo: "Lleva 3 y ahorra". Asi el cliente compra un poco mas sin sentirlo pesado.', reward: '+14 pts', status: 'active' },
+    { label: 'Revisa tu ganancia', detail: 'Antes de aceptar la promo, confirma que el descuento todavia te deje buena ganancia.', reward: '+18 pts', status: 'locked' },
+    { label: 'Repite lo que funciono', detail: 'Si la promo sube tus ventas, guardala para volver a usarla en tus proximos pedidos.', reward: '+22 pts', status: 'locked' },
+  ]
+
   const pathLibrary = {
-    'Aumentar promedio de ticket': [
-      { label: 'Analisis de Afinidad', detail: `Ticket actual: ${money(ticket)}. Identifica productos que se compran juntos. El perfil indica relacion entre basicos y snacks.`, reward: '+8 pts', status: 'done' },
-      { label: 'Estrategia de Upselling', detail: 'Diseña una oferta donde el cliente reciba un beneficio claro al subir su volumen de compra habitual.', reward: '+14 pts', status: 'active' },
-      { label: 'Validacion de Margen', detail: 'Asegura que el incremento en ventas no afecte tu rentabilidad neta por pedido antes de confirmar el carrito.', reward: '+18 pts', status: 'locked' },
-      { label: 'Escalamiento IA', detail: 'Si el ticket promedio sube un 10%, el agente automatizara esta recomendacion para tus proximos pedidos.', reward: '+22 pts', status: 'locked' },
-    ],
-    'Subir ticket promedio': [
-      { label: 'Analisis de Afinidad', detail: `Ticket actual: ${money(ticket)}. Identifica productos que se compran juntos. El perfil indica relacion entre basicos y snacks.`, reward: '+8 pts', status: 'done' },
-      { label: 'Estrategia de Upselling', detail: 'Diseña una oferta donde el cliente reciba un beneficio claro al subir su volumen de compra habitual.', reward: '+14 pts', status: 'active' },
-      { label: 'Validacion de Margen', detail: 'Asegura que el incremento en ventas no afecte tu rentabilidad neta por pedido antes de confirmar el carrito.', reward: '+18 pts', status: 'locked' },
-      { label: 'Escalamiento IA', detail: 'Si el ticket promedio sube un 10%, el agente automatizara esta recomendacion para tus proximos pedidos.', reward: '+22 pts', status: 'locked' },
-    ],
+    'Aumentar promedio de ticket': ticketCopy,
+    'Subir ticket promedio': ticketCopy,
     Diversificacion: [
-      { label: 'Diagnostico de Riesgo', detail: 'Identifica el producto que domina tus ventas. Reducir la dependencia de un solo SKU hara tu negocio mas resiliente.', reward: '+8 pts', status: 'done' },
-      { label: 'Oportunidades IA', detail: 'Tuali detecto categorias que tus clientes ya buscan en otros canales. Es momento de traer esa venta a tu tienda.', reward: '+14 pts', status: 'active' },
-      { label: 'Surtido de Prueba', detail: 'Introduce 2 productos nuevos de bajo riesgo. El objetivo es ampliar el catalogo sin comprometer tu flujo de caja.', reward: '+18 pts', status: 'locked' },
-      { label: 'Consolidacion', detail: 'Mide la rotacion: los productos exitosos se quedan como basicos y los de baja salida se rotan por nuevas apuestas.', reward: '+22 pts', status: 'locked' },
+      { label: 'Mira que te falta', detail: 'Revisa si tus clientes te piden productos que todavia no tienes. Empieza por algo facil de vender.', reward: '+8 pts', status: 'done' },
+      { label: 'Prueba pocos productos', detail: 'Agrega 2 productos nuevos, no muchos. Asi pruebas sin gastar de mas.', reward: '+14 pts', status: 'active' },
+      { label: 'Ponlos donde se vean', detail: 'Colocalos cerca del mostrador o junto a productos que ya se venden bien.', reward: '+18 pts', status: 'locked' },
+      { label: 'Deja los que si se venden', detail: 'Si un producto se mueve bien, dejalo fijo. Si no se vende, cambialo por otra opcion.', reward: '+22 pts', status: 'locked' },
     ],
     'Incrementar Pedidos': [
-      { label: 'Auditoria de Stock', detail: `Frecuencia actual: ${frequency}. La IA detecto que te quedas sin productos clave los fines de semana. Revisa tu inventario hoy.`, reward: '+8 pts', status: 'done' },
-      { label: 'Sincronizacion Tuali', detail: 'Alinea tus dias de pedido con los picos de demanda proyectados por el agente para no perder ventas.', reward: '+14 pts', status: 'active' },
-      { label: 'Pedido Anticipado', detail: 'Realiza tu orden 48 horas antes de lo habitual para asegurar disponibilidad y prioridad en el surtido.', reward: '+18 pts', status: 'locked' },
-      { label: 'Optimizacion Logistica', detail: 'Reduce el costo por entrega consolidando tus necesidades en pedidos mas grandes y eficientes.', reward: '+22 pts', status: 'locked' },
+      { label: 'Cuenta tus basicos', detail: `Hoy haces alrededor de ${frequency} pedido por periodo. Revisa que no falte lo que mas vendes antes del fin de semana.`, reward: '+8 pts', status: 'done' },
+      { label: 'Pide antes de quedarte sin producto', detail: 'Haz tu pedido con tiempo para no perder ventas por falta de refrescos, botanas o agua.', reward: '+14 pts', status: 'active' },
+      { label: 'Confirma que llego todo', detail: 'Cuando recibas el pedido, revisa rapido que este completo y acomoda primero lo que mas se vende.', reward: '+18 pts', status: 'locked' },
+      { label: 'Mantente surtida', detail: 'Si te funciono pedir antes, repitelo cada semana para no quedarte corta.', reward: '+22 pts', status: 'locked' },
     ],
     'Aplicar Promociones': [
-      { label: 'Filtrado de Ofertas', detail: 'Selecciona unicamente las promociones que tienen alta probabilidad de rotacion segun tu historial de ventas.', reward: '+8 pts', status: 'done' },
-      { label: 'Calculo de Retorno', detail: 'Verifica cuantos puntos Gana y cuanto margen extra generara la promocion seleccionada antes de aplicarla.', reward: '+14 pts', status: 'active' },
-      { label: 'Ejecucion Visual', detail: 'Coloca señaletica clara. La IA sugiere que las promos de bebidas funcionan mejor cerca del mostrador de cobro.', reward: '+18 pts', status: 'locked' },
-      { label: 'Analisis de ROI', detail: 'Compara las ventas del periodo contra la semana anterior para validar el exito real de la promocion aplicada.', reward: '+22 pts', status: 'locked' },
+      { label: 'Elige una promo buena', detail: 'Escoge una promo de productos que tus clientes si compran, no solo la que se ve mas barata.', reward: '+8 pts', status: 'done' },
+      { label: 'Revisa tu ganancia', detail: 'Antes de aplicarla, confirma que todavia te deje dinero despues del descuento.', reward: '+14 pts', status: 'active' },
+      { label: 'Pon un cartel claro', detail: 'Escribe la promo grande y facil de leer. Ponla cerca del mostrador o donde este el producto.', reward: '+18 pts', status: 'locked' },
+      { label: 'Mira si vendiste mas', detail: 'Al final del dia, revisa si se movieron mas piezas que antes. Si funciono, repitela.', reward: '+22 pts', status: 'locked' },
     ],
     'Crear Combos': [
-      { label: 'Sinergia de Productos', detail: 'Agrupa un producto de alta rotacion con uno de margen superior para equilibrar la ganancia de tu negocio.', reward: '+8 pts', status: 'done' },
-      { label: 'Precio Psicologico', detail: 'Define un precio "gancho" que termine en .90 o .50. Tuali sugiere que esto aumenta la conversion en tu cluster.', reward: '+14 pts', status: 'active' },
-      { label: 'Impulso Social', detail: 'Sube una foto de tu combo a redes. Los tenderos de tu cluster que lo hacen venden un 15% mas de promedio.', reward: '+18 pts', status: 'locked' },
-      { label: 'Revision de Mix', detail: 'Ajusta los componentes del combo cada 15 dias para mantener el interes de tus clientes mas recurrentes.', reward: '+22 pts', status: 'locked' },
+      { label: 'Junta productos amigos', detail: 'Elige productos que se antojan juntos, como bebida y botana.', reward: '+8 pts', status: 'done' },
+      { label: 'Pon precio atractivo', detail: 'Haz que el combo se sienta conveniente para el cliente y claro para ti.', reward: '+14 pts', status: 'active' },
+      { label: 'Ten combos listos', detail: 'Deja algunos combos preparados cerca del mostrador para venderlos rapido.', reward: '+18 pts', status: 'locked' },
+      { label: 'Cambia el combo', detail: 'Prueba otro combo cada 15 dias para que tus clientes vean algo nuevo.', reward: '+22 pts', status: 'locked' },
     ],
     Activacion: [
-      { label: 'Segmentacion Activa', detail: 'Identifica que clientes han dejado de visitarte. El agente los ha marcado con bandera roja en tu panel de control.', reward: '+8 pts', status: 'done' },
-      { label: 'Oferta de Reenganche', detail: 'Prepara un beneficio exclusivo o descuento personalizado que solo sea valido para su siguiente compra.', reward: '+14 pts', status: 'active' },
-      { label: 'Contacto Directo', detail: 'Usa WhatsApp o recordatorios fisicos para avisarles que tienes su pedido recurrente listo para entrega.', reward: '+18 pts', status: 'locked' },
-      { label: 'Ciclo de Fidelidad', detail: 'Asegura que el primer pedido de regreso sea perfecto para convertir al cliente en comprador semanal de nuevo.', reward: '+22 pts', status: 'locked' },
+      { label: 'Piensa quien dejo de venir', detail: 'Identifica clientes que antes compraban seguido y ya no han regresado.', reward: '+8 pts', status: 'done' },
+      { label: 'Prepara un beneficio', detail: 'Dales una razon sencilla para volver, como una promo pequena o un combo especial.', reward: '+14 pts', status: 'active' },
+      { label: 'Mandales un mensaje', detail: 'Usa WhatsApp o una invitacion directa para contarles que tienes algo para ellos.', reward: '+18 pts', status: 'locked' },
+      { label: 'Cuida su regreso', detail: 'Cuando vuelvan, asegurate de que encuentren el producto listo y una buena atencion.', reward: '+22 pts', status: 'locked' },
     ],
   }
 
   return pathLibrary[topGoal] || [
-    { label: 'Define', detail: selectedGoal?.objective || 'Convierte la meta en una accion medible.', reward: '+8 pts', status: 'done' },
-    { label: 'Primer paso', detail: 'El agente sugiere una accion pequena para iniciar hoy.', reward: '+14 pts', status: 'active' },
-    { label: 'Comprueba', detail: 'Revisa avance, puntos y efecto en el pedido.', reward: '+18 pts', status: 'locked' },
-    { label: 'Completa', detail: 'Cierra la meta y desbloquea un achievement.', reward: '+22 pts', status: 'locked' },
+    { label: 'Elige tu meta', detail: selectedGoal?.objective || 'Convierte tu meta en una accion sencilla para hacer hoy.', reward: '+8 pts', status: 'done' },
+    { label: 'Haz el primer paso', detail: 'Empieza con una accion pequena que puedas probar en tu tienda hoy.', reward: '+14 pts', status: 'active' },
+    { label: 'Revisa como te fue', detail: 'Mira si vendiste mas, si ahorraste o si tus clientes respondieron bien.', reward: '+18 pts', status: 'locked' },
+    { label: 'Repite lo bueno', detail: 'Si funciono, guardalo como parte de tu rutina.', reward: '+22 pts', status: 'locked' },
   ]
+}
+
+function applyGoalPathProgress(steps, activeIndex = 0) {
+  return steps.map((step, index) => ({
+    ...step,
+    status: index < activeIndex ? 'done' : index === activeIndex ? 'active' : 'locked',
+  }))
 }
 
 export default function MiMeta({ onAvatarClick }) {
@@ -496,6 +502,11 @@ export default function MiMeta({ onAvatarClick }) {
   const [selectedGoalPath, setSelectedGoalPath] = useState(null)
   const [pathCoach, setPathCoach] = useState('')
   const [isPathCoachLoading, setIsPathCoachLoading] = useState(false)
+  const [pathChatMessages, setPathChatMessages] = useState([])
+  const [pathChatInput, setPathChatInput] = useState('')
+  const [isPathAgentSending, setIsPathAgentSending] = useState(false)
+  const [activePathStepIndex, setActivePathStepIndex] = useState(0)
+  const [readingPathStepIndex, setReadingPathStepIndex] = useState(null)
   const [customGoals, setCustomGoals] = useState([])
   const [customDraft, setCustomDraft] = useState({
     type: 'Subir ticket promedio',
@@ -503,6 +514,7 @@ export default function MiMeta({ onAvatarClick }) {
     deadline: '',
     customName: '',
   })
+  const pathReadIdRef = useRef(0)
 
   const loggedProfile = useMemo(findLoggedProfile, [])
   const profile = loggedProfile.data
@@ -525,6 +537,8 @@ export default function MiMeta({ onAvatarClick }) {
     }
   })()
   const myPosition = competition.ranking.findIndex((item) => item.me) + 1
+  const goalPathSteps = selectedGoalPath?.steps || []
+  const goalPathProgress = Math.round((goalPathSteps.filter((step) => step.status === 'done').length / Math.max(goalPathSteps.length, 1)) * 100)
 
   function toggleRecommendation(tag) {
     setAccepted((current) =>
@@ -605,8 +619,10 @@ export default function MiMeta({ onAvatarClick }) {
 
   function openGoalPath(selectedGoal) {
     const goalTitle = selectedGoal.title || selectedGoal.tipo || 'Meta de crecimiento'
-    const steps = buildGoalPath(selectedGoal, profile)
+    const steps = applyGoalPathProgress(buildGoalPath(selectedGoal, profile), 0)
     const meta = getGoalMeta(selectedGoal)
+    const activeStep = steps.find((step) => step.status === 'active') || steps[0]
+    const coachMessage = `Vamos paso por paso. Para "${goalTitle}", empieza con: "${activeStep?.label}". Puedo decirte que hacer hoy, que producto usar o como saber si funciono.`
     
     setSelectedGoalPath({ 
       ...selectedGoal, 
@@ -615,8 +631,128 @@ export default function MiMeta({ onAvatarClick }) {
       impactValue: selectedGoal.impactValue || (goalTitle.includes('ticket') ? '+12% ticket' : '+15% venta')
     })
     
-    // Simulate AI coaching message without hard dependency on external API
-    setPathCoach(`Para alcanzar "${goalTitle}", el agente Tuali recomienda enfocarte en: "${steps.find(s => s.status === 'active')?.label || steps[0].label}". ¡Vamos por esos puntos!`)
+    setPathCoach(coachMessage)
+    setPathChatMessages([{ who: 'bot', text: coachMessage }])
+    setPathChatInput('')
+    setActivePathStepIndex(0)
+  }
+
+  async function readPathStep(step, index) {
+    if (!step) return
+
+    const readId = pathReadIdRef.current + 1
+    pathReadIdRef.current = readId
+    const stepText = `Paso ${index + 1}. ${step.label}. ${step.detail}. Al hacerlo ganas ${step.reward}.`
+    setActivePathStepIndex(index)
+    setPathCoach(stepText)
+    setPathChatMessages((current) => [
+      ...current,
+      { who: 'bot', text: `Te leo el paso ${index + 1}: ${step.label}. ${step.detail}` },
+    ])
+    setReadingPathStepIndex(index)
+
+    try {
+      await speak(stepText, normalizeText(profile.pais || 'Mexico').toLowerCase())
+    } catch (error) {
+      setPathChatMessages((current) => [
+        ...current,
+        {
+          who: 'bot',
+          text: `No pude reproducir la voz. Revisa que el servidor este corriendo y vuelve a tocar Leer. ${error?.message || ''}`.trim(),
+        },
+      ])
+    } finally {
+      if (pathReadIdRef.current === readId) {
+        setReadingPathStepIndex(null)
+      }
+    }
+  }
+
+  function stopPathReading() {
+    pathReadIdRef.current += 1
+    stopSpeaking()
+    setReadingPathStepIndex(null)
+  }
+
+  function completePathStep(index) {
+    stopPathReading()
+    setSelectedGoalPath((current) => {
+      if (!current?.steps?.length) return current
+
+      const hasNextStep = index + 1 < current.steps.length
+      const nextIndex = hasNextStep ? index + 1 : index
+      const updatedSteps = current.steps.map((step, stepIndex) => ({
+        ...step,
+        status: stepIndex <= index ? 'done' : stepIndex === nextIndex ? 'active' : 'locked',
+      }))
+      const nextStep = updatedSteps[nextIndex]
+
+      setActivePathStepIndex(nextIndex)
+      setPathCoach(
+        hasNextStep
+          ? `Listo. Ahora sigue el paso ${nextIndex + 1}: ${nextStep.label}.`
+          : 'Meta completada. Ya puedes reclamar tus puntos y tu logro.',
+      )
+      setPathChatMessages((currentMessages) => [
+        ...currentMessages,
+        {
+          who: 'bot',
+          text: hasNextStep
+            ? `Listo, completaste el paso ${index + 1}. Ahora vamos al paso ${nextIndex + 1}: ${nextStep.label}.`
+            : 'Completaste todos los pasos de esta meta.',
+        },
+      ])
+
+      return { ...current, steps: updatedSteps }
+    })
+  }
+
+  async function askPathAgent(question) {
+    const text = question.trim()
+    if (!text || !selectedGoalPath || isPathAgentSending) return
+
+    const activeStep = selectedGoalPath.steps?.find((step) => step.status === 'active') || selectedGoalPath.steps?.[0]
+    const nextHistory = [...pathChatMessages, { who: 'user', text }]
+    setPathChatMessages(nextHistory)
+    setPathChatInput('')
+    setIsPathAgentSending(true)
+
+    try {
+      const response = await fetch('/api/agent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: text,
+          history: nextHistory.slice(-8),
+          customerProfile: loggedProfile.fileName || DEFAULT_PROFILE_FILE,
+          metaState: {
+            screen: 'Mi Meta - camino de pasos',
+            selectedGoal: selectedGoalPath.title,
+            impactValue: selectedGoalPath.impactValue,
+            activeStep,
+            cluster: profile.perfil,
+            ticketPromedio: profile.metricas_base?.ticket_promedio,
+            frecuencia: profile.metricas_base?.frecuencia,
+          },
+          includeAudio: false,
+        }),
+      })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.error || 'No pude consultar al agente')
+      setPathChatMessages((current) => [...current, { who: 'bot', text: data.reply }])
+      setPathCoach(data.reply)
+    } catch {
+      const fallback = `Para este paso, empieza por "${activeStep?.label}". Hazlo hoy en pequeno, revisa si te ayudo a vender mas y repite si funciono.`
+      setPathChatMessages((current) => [...current, { who: 'bot', text: fallback }])
+      setPathCoach(fallback)
+    } finally {
+      setIsPathAgentSending(false)
+    }
+  }
+
+  function handlePathChatSubmit(event) {
+    event.preventDefault()
+    askPathAgent(pathChatInput)
   }
 
   return (
@@ -675,8 +811,8 @@ export default function MiMeta({ onAvatarClick }) {
       <section className="generated-goals">
         <div className="goal-section-head">
           <div>
-            <h2>Plan generado por IA</h2>
-            <p>Metas del JSON del usuario logueado.</p>
+            <h2>Plan sugerido por Tuali</h2>
+            <p>Metas pensadas para tu tienda.</p>
           </div>
         </div>
         <div className="generated-goal-list">
@@ -706,7 +842,7 @@ export default function MiMeta({ onAvatarClick }) {
         <div className="goal-section-head">
           <div>
             <h2>Metas recomendadas</h2>
-            <p>Acciones calculadas desde su perfil and metas.</p>
+            <p>Pasos sencillos para vender mas esta semana.</p>
           </div>
           <span className="goal-streak">4 dias</span>
         </div>
@@ -756,7 +892,7 @@ export default function MiMeta({ onAvatarClick }) {
         <div className="goal-section-head">
           <div>
             <h2>Crea tu propia meta</h2>
-            <p>El agente la acompana junto con la meta recomendada.</p>
+            <p>Tuali te acompana junto con la meta recomendada.</p>
           </div>
         </div>
         <form className="custom-goal-form" onSubmit={createCustomGoal}>
@@ -792,7 +928,7 @@ export default function MiMeta({ onAvatarClick }) {
         <div className="custom-goal-list">
           {customGoals.length === 0 && (
             <div className="empty-custom-goal">
-              Define una meta propia para combinar tu intuicion con la IA de Tuali.
+              Define una meta propia con lo que tu ya sabes de tu tienda.
             </div>
           )}
           {customGoals.map((item) => (
@@ -926,8 +1062,8 @@ export default function MiMeta({ onAvatarClick }) {
       <section className="cluster-competition">
         <div className="goal-section-head">
           <div>
-            <h2>Competencia de mi cluster</h2>
-            <p>Compites con clientes con metas parecidas.</p>
+            <h2>Competencia de mi grupo</h2>
+            <p>Compites con tiendas con metas parecidas.</p>
           </div>
         </div>
         <div className="cluster-challenge">
@@ -950,7 +1086,7 @@ export default function MiMeta({ onAvatarClick }) {
         </div>
         <div className="cluster-footer">
           <span>Tu posicion: #{myPosition}</span>
-          <button onClick={() => setShowFullRanking(true)}>Ver reto del cluster</button>
+          <button onClick={() => setShowFullRanking(true)}>Ver reto del grupo</button>
         </div>
       </section>
 
@@ -962,35 +1098,105 @@ export default function MiMeta({ onAvatarClick }) {
                 <span>Mapa de Meta</span>
                 <strong>{selectedGoalPath.title}</strong>
               </div>
-              <button onClick={() => setSelectedGoalPath(null)}>X</button>
+              <button onClick={() => {
+                stopPathReading()
+                setSelectedGoalPath(null)
+              }}>X</button>
             </div>
 
             <div className="goal-map-banner">
-              <span>Impacto estimado</span>
+              <span>Meta</span>
               <strong>{selectedGoalPath.impactValue || '+12% ticket'}</strong>
             </div>
 
-            <div className="goal-map-coach">
-              <span>IA</span>
-              <p>{pathCoach}</p>
+            <div className="goal-map-level-progress" aria-label="Progreso del camino">
+              <span style={{ width: `${goalPathProgress}%` }} />
             </div>
 
+            <section className="goal-map-agent-panel">
+              <div className="goal-map-agent-head">
+                <div>
+                  <span>Agente Tuali</span>
+                  <strong>Te acompana paso a paso</strong>
+                </div>
+                {readingPathStepIndex !== null ? (
+                  <button className="goal-map-stop-voice" type="button" onClick={stopPathReading}>
+                    Detener voz
+                  </button>
+                ) : (
+                  <small>{isPathAgentSending ? 'Pensando...' : 'En linea'}</small>
+                )}
+              </div>
+
+              <div className="goal-map-agent-messages">
+                {pathChatMessages.map((message, index) => (
+                  <div className={`goal-map-agent-msg ${message.who}`} key={`${message.who}-${index}`}>
+                    {message.text}
+                  </div>
+                ))}
+                {isPathAgentSending && (
+                  <div className="goal-map-agent-msg bot typing">...</div>
+                )}
+              </div>
+
+              <div className="goal-map-agent-prompts">
+                <button onClick={() => askPathAgent('Que hago primero para avanzar este paso?')}>
+                  Que hago primero?
+                </button>
+                <button onClick={() => askPathAgent('Que producto puedo usar para esta meta?')}>
+                  Que producto usar?
+                </button>
+                <button onClick={() => askPathAgent('Como se si esto ya funciono?')}>
+                  Como se si funciono?
+                </button>
+              </div>
+
+              <form className="goal-map-agent-input" onSubmit={handlePathChatSubmit}>
+                <input
+                  type="text"
+                  placeholder="Preguntale algo de este paso..."
+                  value={pathChatInput}
+                  onChange={(event) => setPathChatInput(event.target.value)}
+                  disabled={isPathAgentSending}
+                />
+                <button type="submit" disabled={isPathAgentSending || !pathChatInput.trim()}>
+                  Enviar
+                </button>
+              </form>
+            </section>
+
             <div className="candy-track">
-              {[...(selectedGoalPath.steps || [])].reverse().map((step, idx) => {
-                const stepNum = (selectedGoalPath.steps || []).length - idx
+              {[...goalPathSteps].reverse().map((step, idx) => {
+                const stepNum = goalPathSteps.length - idx
+                const originalIndex = stepNum - 1
                 const isLeft = stepNum % 2 === 0
                 return (
-                  <div className={`candy-node ${isLeft ? 'candy-left' : 'candy-right'}`} key={idx}>
-                    <div className={`candy-circle ${step.status}`}>
+                  <div className={`candy-node ${isLeft ? 'candy-left' : 'candy-right'} ${activePathStepIndex === originalIndex ? 'selected' : ''}`} key={originalIndex}>
+                    <button
+                      className={`candy-circle ${step.status}`}
+                      type="button"
+                      onClick={() => readPathStep(step, originalIndex)}
+                      aria-label={`Leer paso ${stepNum}: ${step.label}`}
+                    >
                       <span>{stepNum}</span>
-                    </div>
+                      {step.status === 'done' && <b>OK</b>}
+                    </button>
                     <div className="candy-card">
                       <small>{step.reward}</small>
-                      <h3>{step.label}</h3>
+                      <h3>{stepNum}. {step.label}</h3>
                       <p>{step.detail}</p>
-                      {step.status === 'active' && (
-                        <button onClick={() => setSelectedGoalPath(null)}>Completar paso</button>
-                      )}
+                      <div className="candy-card-actions">
+                        <button
+                          type="button"
+                          onClick={() => readPathStep(step, originalIndex)}
+                          disabled={readingPathStepIndex === originalIndex}
+                        >
+                          {readingPathStepIndex === originalIndex ? 'Leyendo...' : 'Leer'}
+                        </button>
+                        {step.status === 'active' && (
+                          <button type="button" onClick={() => completePathStep(originalIndex)}>Completar paso</button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 )
