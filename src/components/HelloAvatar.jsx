@@ -1,48 +1,46 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useCallback, useState } from 'react'  // ← agregar useState
 import Lottie from 'lottie-react'
 import helloAnimation from '../../assets/hello.json'
-import moveAnimation from '../../assets/move.json'
+import { speak } from '../services/tts.js'
+import { detectCountry } from '../services/location.js'
 
-const MOVE_MS = 5000
-const HELLO_MS = 10000
-
-export default function HelloAvatar({ onClick, phrases = ['¿Necesitas ayuda? Pregúntale a la IA'] }) {
+export default function HelloAvatar({ onClick, phrases }) {
   const lottieRef = useRef(null)
-  // El ciclo empieza en 'hello' (con frase, 10s) y luego pasa a 'move' (puntos suspensivos, 5s)
-  // phase: 'hello' (con frase, 10s)  |  'move' (puntos suspensivos, 5s)
   const [phase, setPhase] = useState('hello')
-  // índice de la frase actual; avanza cada vez que entramos a la fase 'hello'
   const [phraseIndex, setPhraseIndex] = useState(0)
+  const speakingRef = useRef(false)
 
-  useEffect(() => {
-    const duration = phase === 'move' ? MOVE_MS : HELLO_MS
-    const timer = setTimeout(() => {
-      if (phase === 'move') {
-        setPhase('hello')
-      } else {
-        // al terminar 'hello', avanzamos a la siguiente frase y volvemos a 'move'
-        setPhraseIndex((i) => (i + 1) % phrases.length)
-        setPhase('move')
-      }
-    }, duration)
-    return () => clearTimeout(timer)
-  }, [phase, phrases.length])
+  const isHello = phase === 'hello'  // ← variable que faltaba definir
 
-  const isHello = phase === 'hello'
+  const handleClick = useCallback(() => {
+    if (speakingRef.current) return
+    speakingRef.current = true
+
+    const country = detectCountry()
+    const list = phrases && phrases.length ? phrases : [
+      '¿Necesitas ayuda? Estoy aquí para lo que necesites',
+    ]
+    const text = list[Math.floor(Math.random() * list.length)]
+
+    speak(text, country).finally(() => {
+      speakingRef.current = false
+    })
+
+    if (onClick) onClick()
+  }, [onClick, phrases])
 
   return (
-    <button className="hello-avatar" onClick={onClick} aria-label="Abrir asistente AI">
+    <button className="hello-avatar" onClick={handleClick} aria-label="Abrir asistente AI">
       <Lottie
-        key={phase}
         lottieRef={lottieRef}
-        animationData={isHello ? helloAnimation : moveAnimation}
+        animationData={helloAnimation}
         loop
         autoplay
         onDOMLoaded={() => lottieRef.current?.setSpeed(2.5)}
         style={{ width: 64, height: 64 }}
       />
       <span className={`hello-avatar-text ${isHello ? 'show' : 'dots'}`}>
-        {isHello ? phrases[phraseIndex] : '...'}
+        {isHello ? (phrases?.[phraseIndex] ?? '') : '...'}
       </span>
     </button>
   )
