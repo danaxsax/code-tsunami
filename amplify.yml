@@ -6,6 +6,7 @@ backend:
         - npm install -g pnpm@9
         - npm install -g --force @aws-amplify/backend-cli
         - pnpm install --no-frozen-lockfile
+        - pnpm rebuild esbuild
         - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
@@ -14,6 +15,7 @@ frontend:
         - npm install -g pnpm@9
         - npm install -g --force @aws-amplify/backend-cli
         - pnpm install --no-frozen-lockfile
+        - pnpm rebuild esbuild
     build:
       commands:
         - pnpm run build
