@@ -1029,25 +1029,25 @@ body {
   padding: 14px 16px 28px;
   color: #2c1720;
   background:
-    radial-gradient(circle at 18% 16%, rgba(255,255,255,0.9), transparent 13%),
-    radial-gradient(circle at 86% 28%, rgba(255,235,160,0.92), transparent 12%),
-    linear-gradient(145deg, #ffe5f0 0%, #f7bbd3 36%, #bdebd1 36%, #84ddbb 100%);
+    radial-gradient(circle at 85% 12%, rgba(185,29,51,0.07), transparent 30%),
+    radial-gradient(circle at 15% 88%, rgba(108,43,217,0.06), transparent 30%),
+    var(--bg);
 }
 .goal-map-topbar {
   position: sticky;
   top: 0;
-  z-index: 2;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
   padding: 12px;
   margin: -2px 0 12px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.82);
-  border: 1px solid rgba(255,255,255,0.86);
-  box-shadow: 0 8px 18px rgba(80, 39, 63, 0.12);
-  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.88);
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 8px 24px rgba(196,77,255,0.15), 0 0 40px rgba(255,107,107,0.08);
+  backdrop-filter: blur(12px);
 }
 .goal-map-topbar span,
 .goal-map-banner span {
@@ -1069,10 +1069,15 @@ body {
   height: 36px;
   border: none;
   border-radius: 50%;
-  background: #b91d33;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
   color: #fff;
   font-weight: 900;
   cursor: pointer;
+  box-shadow: 0 3px 10px rgba(238,90,36,0.3);
+  transition: transform 0.15s ease;
+}
+.goal-map-topbar button:active {
+  transform: scale(0.9);
 }
 .goal-map-banner {
   display: flex;
@@ -1098,9 +1103,10 @@ body {
   align-items: start;
   padding: 12px;
   margin-bottom: 12px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.78);
-  border: 1px solid rgba(255,255,255,0.88);
+  border-radius: 18px;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.9);
+  box-shadow: 0 4px 16px rgba(196,77,255,0.1);
 }
 .goal-map-coach span {
   width: 34px;
@@ -1109,10 +1115,11 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #b91d33;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
   color: #fff;
   font-size: 12px;
   font-weight: 900;
+  box-shadow: 0 3px 8px rgba(238,90,36,0.3);
 }
 .goal-map-coach p {
   margin: 0;
@@ -1120,141 +1127,145 @@ body {
   font-size: 13px;
   line-height: 1.35;
 }
-.goal-map-road {
+/* ---------- CANDY CRUSH GOAL MAP ---------- */
+.candy-track {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 60px;
-  padding: 40px 0 60px;
   align-items: center;
+  padding: 30px 0 20px;
+  min-height: 480px;
 }
-.goal-map-road::before {
+.candy-track::before {
   content: '';
   position: absolute;
-  top: 16px;
-  bottom: 36px;
+  top: 20px;
+  bottom: 20px;
   left: 50%;
-  width: 14px;
+  width: 10px;
+  background: var(--wine);
   border-radius: 999px;
-  background: rgba(255,255,255,0.32);
   transform: translateX(-50%);
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+  opacity: 0.15;
+  z-index: 1;
 }
-.goal-map-node {
+.candy-node {
   position: relative;
   z-index: 2;
-  width: 72px;
-  height: 72px;
-}
-.goal-map-dot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   width: 100%;
-  height: 100%;
+  padding: 12px 16px;
+}
+.candy-node.candy-left {
+  flex-direction: row;
+  padding-left: 36px;
+}
+.candy-node.candy-left .candy-card {
+  margin-left: 4px;
+}
+.candy-node.candy-right {
+  flex-direction: row-reverse;
+  padding-right: 36px;
+}
+.candy-node.candy-right .candy-card {
+  margin-right: 4px;
+}
+.candy-circle {
+  flex: 0 0 auto;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  background: #5c317f;
-  border: 4px solid #fff;
-  box-shadow: 0 8px 0 rgba(0,0,0,0.15), 0 0 20px rgba(255,255,255,0.2);
-  cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.goal-map-dot span {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 900;
+  color: #fff;
+  border: 3px solid rgba(255,255,255,0.85);
+  box-shadow: 0 5px 0 rgba(0,0,0,0.15), inset 0 -4px 8px rgba(0,0,0,0.13);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+.candy-circle:hover {
+  transform: scale(1.18) rotate(-5deg);
+}
+.candy-node:nth-child(1) .candy-circle {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  box-shadow: 0 5px 0 rgba(238,90,36,0.4), 0 0 20px rgba(255,107,107,0.3), inset 0 -4px 8px rgba(0,0,0,0.13);
+}
+.candy-node:nth-child(2) .candy-circle {
+  background: linear-gradient(135deg, #ffd93d, #ff9f43);
+  box-shadow: 0 5px 0 rgba(255,159,67,0.4), 0 0 20px rgba(255,217,61,0.3), inset 0 -4px 8px rgba(0,0,0,0.13);
+}
+.candy-node:nth-child(3) .candy-circle {
+  background: linear-gradient(135deg, #6bcbff, #0abde3);
+  box-shadow: 0 5px 0 rgba(10,189,227,0.4), 0 0 20px rgba(107,203,255,0.3), inset 0 -4px 8px rgba(0,0,0,0.13);
+}
+.candy-node:nth-child(4) .candy-circle {
+  background: linear-gradient(135deg, #c44dff, #a55eea);
+  box-shadow: 0 5px 0 rgba(165,94,234,0.4), 0 0 20px rgba(196,77,255,0.3), inset 0 -4px 8px rgba(0,0,0,0.13);
+}
+.candy-node:nth-child(5) .candy-circle {
+  background: linear-gradient(135deg, #ff9ff3, #f368e0);
+  box-shadow: 0 5px 0 rgba(243,104,224,0.4), 0 0 20px rgba(255,159,243,0.3), inset 0 -4px 8px rgba(0,0,0,0.13);
+}
+.candy-circle span {
   text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
-.goal-map-node:hover .goal-map-dot {
-  transform: scale(1.15) rotate(5deg);
-}
-
-/* Multicolored nodes */
-.goal-map-node:nth-child(5n+1) .goal-map-dot { background: #ff4b4b; }
-.goal-map-node:nth-child(5n+2) .goal-map-dot { background: #ffac33; }
-.goal-map-node:nth-child(5n+3) .goal-map-dot { background: #4caf50; }
-.goal-map-node:nth-child(5n+4) .goal-map-dot { background: #00bcd4; }
-.goal-map-node:nth-child(5n+5) .goal-map-dot { background: #e91e63; }
-
-.goal-map-card {
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  transform: translateY(-50%) translateX(20px);
-  width: 165px;
+.candy-card {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
   padding: 12px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.98);
-  border: 1px solid #fff;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 10;
+  border: 1px solid rgba(255,255,255,0.85);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  max-width: 200px;
+  transition: all 0.25s ease;
 }
-.goal-map-node:nth-child(even) .goal-map-card {
-  left: auto;
-  right: 100%;
-  transform: translateY(-50%) translateX(-20px);
+.candy-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
 }
-.goal-map-node:hover .goal-map-card {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(-50%) translateX(10px);
-}
-.goal-map-node:nth-child(even):hover .goal-map-card {
-  transform: translateY(-50%) translateX(-10px);
-}
-
-.goal-map-card::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: 100%;
-  transform: translateY(-50%);
-  border: 8px solid transparent;
-  border-right-color: #fff;
-}
-.goal-map-node:nth-child(even) .goal-map-card::before {
-  right: auto;
-  left: 100%;
-  border-right-color: transparent;
-  border-left-color: #fff;
-}
-
-.goal-map-card small {
+.candy-card small {
   display: inline-flex;
   border-radius: 999px;
   padding: 3px 8px;
-  background: #fdf3d6;
+  background: linear-gradient(135deg, #fdf3d6, #fce4b8);
   color: #8a5b08;
   font-size: 10px;
   font-weight: 900;
   margin-bottom: 6px;
 }
-.goal-map-card h3 {
+.candy-card h3 {
   margin: 0 0 4px;
   font-size: 14px;
   color: var(--wine);
   line-height: 1.2;
 }
-.goal-map-card p {
+.candy-card p {
   margin: 0;
-  color: #4a4a4a;
+  color: #555;
   font-size: 11px;
   line-height: 1.35;
 }
-.goal-map-card button {
+.candy-card button {
   width: 100%;
-  margin-top: 12px;
+  margin-top: 10px;
   border: none;
-  border-radius: 12px;
+  border-radius: 999px;
   padding: 10px;
-  background: var(--wine);
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
   color: #fff;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 900;
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(238,90,36,0.3);
+  transition: transform 0.15s ease;
+}
+.candy-card button:active {
+  transform: scale(0.96);
 }
 .social-mission {
   border: 1px solid var(--border);
