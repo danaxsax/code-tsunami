@@ -965,22 +965,26 @@ export default function MiMeta({ onAvatarClick }) {
               <p>{pathCoach}</p>
             </div>
 
-            <div className="goal-map-road">
-              {(selectedGoalPath.steps || []).map((step, idx) => (
-                <div className={`goal-map-node ${step.status}`} key={idx}>
-                  <div className="goal-map-dot">
-                    <span>{idx + 1}</span>
+            <div className="candy-track">
+              {[...(selectedGoalPath.steps || [])].reverse().map((step, idx) => {
+                const stepNum = (selectedGoalPath.steps || []).length - idx
+                const isLeft = stepNum % 2 === 0
+                return (
+                  <div className={`candy-node ${isLeft ? 'candy-left' : 'candy-right'}`} key={idx}>
+                    <div className={`candy-circle ${step.status}`}>
+                      <span>{stepNum}</span>
+                    </div>
+                    <div className="candy-card">
+                      <small>{step.reward}</small>
+                      <h3>{step.label}</h3>
+                      <p>{step.detail}</p>
+                      {step.status === 'active' && (
+                        <button onClick={() => setSelectedGoalPath(null)}>Completar paso</button>
+                      )}
+                    </div>
                   </div>
-                  <div className="goal-map-card">
-                    <small>{step.reward}</small>
-                    <h3>{step.label}</h3>
-                    <p>{step.detail}</p>
-                    {step.status === 'active' && (
-                      <button onClick={() => setSelectedGoalPath(null)}>Completar paso</button>
-                    )}
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </div>

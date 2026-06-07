@@ -7,7 +7,7 @@ frontend:
         - pnpm install --no-frozen-lockfile
     build:
       commands:
-        - pnpm run build
+        - pnpm run dev:full
   artifacts:
     baseDirectory: dist
     files:
