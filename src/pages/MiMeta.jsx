@@ -55,6 +55,51 @@ const goalCatalog = {
   },
 }
 
+const goalRoadmaps = {
+  'Aumentar promedio de ticket': [
+    { label: 'Analizar complementarios', desc: 'Revisa que productos se compran juntos con frecuencia.' },
+    { label: 'Crear combos sugeridos', desc: 'Arma paquetes que ofrezcan valor real al cliente.' },
+    { label: 'Capacitacion de venta', desc: 'Entrena a tu equipo para ofrecer el combo en caja.' },
+    { label: 'Medir ticket promedio', desc: 'Compara el valor antes y despues de los combos.' },
+    { label: 'Optimizar oferta', desc: 'Ajusta los combos que mejor rotacion tuvieron.' },
+  ],
+  Diversificacion: [
+    { label: 'Identificar huecos', desc: 'Busca categorias que tus clientes piden pero no tienes.' },
+    { label: 'Seleccion de SKUs', desc: 'Elige 3 productos estrella de la nueva categoria.' },
+    { label: 'Exhibicion premium', desc: 'Ubica los productos en el area de mayor flujo.' },
+    { label: 'Promocion de lanzamiento', desc: 'Ofrece una pequeña prueba o descuento inicial.' },
+    { label: 'Analisis de rotacion', desc: 'Verifica si la categoria se vuelve autosustentable.' },
+  ],
+  'Incrementar Pedidos': [
+    { label: 'Auditoria de stock', desc: 'Haz un conteo rapido de tus productos de alta rotacion.' },
+    { label: 'Configurar alertas', desc: 'Activa recordatorios 2 dias antes de agotar stock.' },
+    { label: 'Pedido anticipado', desc: 'Realiza tu orden antes del pico de demanda semanal.' },
+    { label: 'Verificar recepcion', desc: 'Asegura que todo llego en tiempo y forma.' },
+    { label: 'Evaluacion de ahorro', desc: 'Revisa cuanto ganaste al no perder ventas por falta de stock.' },
+  ],
+  'Aplicar Promociones': [
+    { label: 'Revisar catalogo', desc: 'Encuentra las promos vigentes de tus proveedores.' },
+    { label: 'Calcular margen', desc: 'Asegura que la promo sea rentable para tu negocio.' },
+    { label: 'Señaletica clara', desc: 'Coloca carteles con el precio anterior y el de promo.' },
+    { label: 'Comunicacion directa', desc: 'Avisa a tus clientes mas leales sobre la oferta.' },
+    { label: 'Validar exito', desc: 'Mide cuantas unidades extra vendiste gracias a la promo.' },
+  ],
+  'Crear Combos': [
+    { label: 'Analisis de afinidad', desc: 'Identifica que productos "llaman" a otros.' },
+    { label: 'Estrategia de precio', desc: 'Define un precio que sea menor a la suma individual.' },
+    { label: 'Empaque visual', desc: 'Usa ligas o bolsas para que el combo se vea como uno solo.' },
+    { label: 'Impulso en mostrador', desc: 'Manten 5 combos listos para entrega inmediata.' },
+    { label: 'Rotacion de combos', desc: 'Cambia los productos cada 15 dias para mantener el interes.' },
+  ],
+  Activacion: [
+    { label: 'Listado de inactivos', desc: 'Identifica quienes no han comprado en 15 dias.' },
+    { label: 'Oferta gancho', desc: 'Prepara un beneficio exclusivo para su regreso.' },
+    { label: 'Contacto multicanal', desc: 'Usa WhatsApp o visitas para recordarles tu tienda.' },
+    { label: 'Primer pedido', desc: 'Asegura una experiencia perfecta en su compra de regreso.' },
+    { label: 'Fidelizacion', desc: 'Sigue su comportamiento para evitar que se vuelvan a alejar.' },
+  ],
+}
+
 const profileCopy = {
   VIP: 'Compra con alto valor. El agente prioriza ticket promedio, combos y promociones de mayor impacto.',
   Recurrente: 'Compra con frecuencia. El agente prioriza diversificacion y nuevas oportunidades de surtido.',
@@ -221,8 +266,10 @@ function normalizeText(value = '') {
   return String(value)
     .replaceAll('DiversificaciÃ³n', 'Diversificacion')
     .replaceAll('DiversificaciÃƒÂ³n', 'Diversificacion')
+    .replaceAll('Diversificación', 'Diversificacion')
     .replaceAll('ActivaciÃ³n', 'Activacion')
     .replaceAll('ActivaciÃƒÂ³n', 'Activacion')
+    .replaceAll('Activación', 'Activacion')
     .replaceAll('MÃ©xico', 'Mexico')
     .replaceAll('MÃƒÂ©xico', 'Mexico')
     .replaceAll('PerÃº', 'Peru')
@@ -368,46 +415,46 @@ function buildGoalPath(selectedGoal, profile) {
 
   const pathLibrary = {
     'Aumentar promedio de ticket': [
-      { label: 'Diagnostica', detail: `Ticket actual: ${money(ticket)}. Detecta productos que ya compra seguido.`, reward: '+8 pts', status: 'done' },
-      { label: 'Arma combo', detail: 'Crea un combo con producto principal y complemento de alta rotacion.', reward: '+14 pts', status: 'active' },
-      { label: 'Agrega al pedido', detail: 'Suma el combo al carrito sugerido y revisa que el margen siga sano.', reward: '+18 pts', status: 'locked' },
-      { label: 'Mide impacto', detail: 'Compara el ticket del siguiente pedido contra el objetivo semanal.', reward: '+22 pts', status: 'locked' },
+      { label: 'Analisis de Afinidad', detail: `Ticket actual: ${money(ticket)}. Identifica productos que se compran juntos. El perfil indica relacion entre basicos y snacks.`, reward: '+8 pts', status: 'done' },
+      { label: 'Estrategia de Upselling', detail: 'Diseña una oferta donde el cliente reciba un beneficio claro al subir su volumen de compra habitual.', reward: '+14 pts', status: 'active' },
+      { label: 'Validacion de Margen', detail: 'Asegura que el incremento en ventas no afecte tu rentabilidad neta por pedido antes de confirmar el carrito.', reward: '+18 pts', status: 'locked' },
+      { label: 'Escalamiento IA', detail: 'Si el ticket promedio sube un 10%, el agente automatizara esta recomendacion para tus proximos pedidos.', reward: '+22 pts', status: 'locked' },
     ],
     'Subir ticket promedio': [
-      { label: 'Diagnostica', detail: `Ticket actual: ${money(ticket)}. Detecta productos que ya compra seguido.`, reward: '+8 pts', status: 'done' },
-      { label: 'Arma combo', detail: 'Crea un combo con producto principal y complemento de alta rotacion.', reward: '+14 pts', status: 'active' },
-      { label: 'Agrega al pedido', detail: 'Suma el combo al carrito sugerido y revisa que el margen siga sano.', reward: '+18 pts', status: 'locked' },
-      { label: 'Mide impacto', detail: 'Compara el ticket del siguiente pedido contra el objetivo semanal.', reward: '+22 pts', status: 'locked' },
+      { label: 'Analisis de Afinidad', detail: `Ticket actual: ${money(ticket)}. Identifica productos que se compran juntos. El perfil indica relacion entre basicos y snacks.`, reward: '+8 pts', status: 'done' },
+      { label: 'Estrategia de Upselling', detail: 'Diseña una oferta donde el cliente reciba un beneficio claro al subir su volumen de compra habitual.', reward: '+14 pts', status: 'active' },
+      { label: 'Validacion de Margen', detail: 'Asegura que el incremento en ventas no afecte tu rentabilidad neta por pedido antes de confirmar el carrito.', reward: '+18 pts', status: 'locked' },
+      { label: 'Escalamiento IA', detail: 'Si el ticket promedio sube un 10%, el agente automatizara esta recomendacion para tus proximos pedidos.', reward: '+22 pts', status: 'locked' },
     ],
     Diversificacion: [
-      { label: 'Encuentra riesgo', detail: 'Ubica el producto que concentra mas ventas del perfil.', reward: '+8 pts', status: 'done' },
-      { label: 'Elige categoria', detail: 'Selecciona una categoria cercana para no cambiar la rutina de compra.', reward: '+14 pts', status: 'active' },
-      { label: 'Prueba surtido', detail: 'Agrega 2 SKUs pequenos y mide si rotan esta semana.', reward: '+18 pts', status: 'locked' },
-      { label: 'Consolida', detail: 'Mantiene los productos que funcionaron y retira los de baja salida.', reward: '+22 pts', status: 'locked' },
+      { label: 'Diagnostico de Riesgo', detail: 'Identifica el producto que domina tus ventas. Reducir la dependencia de un solo SKU hara tu negocio mas resiliente.', reward: '+8 pts', status: 'done' },
+      { label: 'Oportunidades IA', detail: 'Tuali detecto categorias que tus clientes ya buscan en otros canales. Es momento de traer esa venta a tu tienda.', reward: '+14 pts', status: 'active' },
+      { label: 'Surtido de Prueba', detail: 'Introduce 2 productos nuevos de bajo riesgo. El objetivo es ampliar el catalogo sin comprometer tu flujo de caja.', reward: '+18 pts', status: 'locked' },
+      { label: 'Consolidacion', detail: 'Mide la rotacion: los productos exitosos se quedan como basicos y los de baja salida se rotan por nuevas apuestas.', reward: '+22 pts', status: 'locked' },
     ],
     'Incrementar Pedidos': [
-      { label: 'Agenda', detail: `Frecuencia actual: ${frequency}. Programa el siguiente pedido recomendado.`, reward: '+8 pts', status: 'done' },
-      { label: 'Recordatorio', detail: 'Activa un aviso antes del dia de recompra con carrito precargado.', reward: '+14 pts', status: 'active' },
-      { label: 'Pedido rapido', detail: 'Confirma basicos y agrega una promocion de baja friccion.', reward: '+18 pts', status: 'locked' },
-      { label: 'Racha', detail: 'Completa 2 pedidos seguidos sin dejar pasar la semana objetivo.', reward: '+22 pts', status: 'locked' },
+      { label: 'Auditoria de Stock', detail: `Frecuencia actual: ${frequency}. La IA detecto que te quedas sin productos clave los fines de semana. Revisa tu inventario hoy.`, reward: '+8 pts', status: 'done' },
+      { label: 'Sincronizacion Tuali', detail: 'Alinea tus dias de pedido con los picos de demanda proyectados por el agente para no perder ventas.', reward: '+14 pts', status: 'active' },
+      { label: 'Pedido Anticipado', detail: 'Realiza tu orden 48 horas antes de lo habitual para asegurar disponibilidad y prioridad en el surtido.', reward: '+18 pts', status: 'locked' },
+      { label: 'Optimizacion Logistica', detail: 'Reduce el costo por entrega consolidando tus necesidades en pedidos mas grandes y eficientes.', reward: '+22 pts', status: 'locked' },
     ],
     'Aplicar Promociones': [
-      { label: 'Detecta promo', detail: 'Elige una promocion que ya coincide con el historial de compra.', reward: '+8 pts', status: 'done' },
-      { label: 'Calcula ahorro', detail: 'Revisa ahorro, puntos y productos que conviene sumar.', reward: '+14 pts', status: 'active' },
-      { label: 'Aplica', detail: 'Activa la promo en el pedido sugerido.', reward: '+18 pts', status: 'locked' },
-      { label: 'Repite', detail: 'Guarda la promocion si sube recompra o margen.', reward: '+22 pts', status: 'locked' },
+      { label: 'Filtrado de Ofertas', detail: 'Selecciona unicamente las promociones que tienen alta probabilidad de rotacion segun tu historial de ventas.', reward: '+8 pts', status: 'done' },
+      { label: 'Calculo de Retorno', detail: 'Verifica cuantos puntos Gana y cuanto margen extra generara la promocion seleccionada antes de aplicarla.', reward: '+14 pts', status: 'active' },
+      { label: 'Ejecucion Visual', detail: 'Coloca señaletica clara. La IA sugiere que las promos de bebidas funcionan mejor cerca del mostrador de cobro.', reward: '+18 pts', status: 'locked' },
+      { label: 'Analisis de ROI', detail: 'Compara las ventas del periodo contra la semana anterior para validar el exito real de la promocion aplicada.', reward: '+22 pts', status: 'locked' },
     ],
     'Crear Combos': [
-      { label: 'Pareja ideal', detail: 'Une los dos productos frecuentes del JSON del usuario.', reward: '+8 pts', status: 'done' },
-      { label: 'Precio claro', detail: 'Define un precio facil de comunicar en mostrador.', reward: '+14 pts', status: 'active' },
-      { label: 'Promociona', detail: 'Sube foto o TikTok del combo para atraer clientes.', reward: '+18 pts', status: 'locked' },
-      { label: 'Escala', detail: 'Convierte el combo en reto semanal si mejora el ticket.', reward: '+22 pts', status: 'locked' },
+      { label: 'Sinergia de Productos', detail: 'Agrupa un producto de alta rotacion con uno de margen superior para equilibrar la ganancia de tu negocio.', reward: '+8 pts', status: 'done' },
+      { label: 'Precio Psicologico', detail: 'Define un precio "gancho" que termine en .90 o .50. Tuali sugiere que esto aumenta la conversion en tu cluster.', reward: '+14 pts', status: 'active' },
+      { label: 'Impulso Social', detail: 'Sube una foto de tu combo a redes. Los tenderos de tu cluster que lo hacen venden un 15% mas de promedio.', reward: '+18 pts', status: 'locked' },
+      { label: 'Revision de Mix', detail: 'Ajusta los componentes del combo cada 15 dias para mantener el interes de tus clientes mas recurrentes.', reward: '+22 pts', status: 'locked' },
     ],
     Activacion: [
-      { label: 'Reengancha', detail: 'Identifica el gancho comercial para volver a comprar.', reward: '+8 pts', status: 'done' },
-      { label: 'Oferta simple', detail: 'Muestra una oferta pequena con productos conocidos.', reward: '+14 pts', status: 'active' },
-      { label: 'Primer pedido', detail: 'Completa una recompra sin subir demasiado la inversion.', reward: '+18 pts', status: 'locked' },
-      { label: 'Habito', detail: 'Convierte la recompra en recordatorio semanal.', reward: '+22 pts', status: 'locked' },
+      { label: 'Segmentacion Activa', detail: 'Identifica que clientes han dejado de visitarte. El agente los ha marcado con bandera roja en tu panel de control.', reward: '+8 pts', status: 'done' },
+      { label: 'Oferta de Reenganche', detail: 'Prepara un beneficio exclusivo o descuento personalizado que solo sea valido para su siguiente compra.', reward: '+14 pts', status: 'active' },
+      { label: 'Contacto Directo', detail: 'Usa WhatsApp o recordatorios fisicos para avisarles que tienes su pedido recurrente listo para entrega.', reward: '+18 pts', status: 'locked' },
+      { label: 'Ciclo de Fidelidad', detail: 'Asegura que el primer pedido de regreso sea perfecto para convertir al cliente en comprador semanal de nuevo.', reward: '+22 pts', status: 'locked' },
     ],
   }
 
@@ -430,6 +477,9 @@ export default function MiMeta({ onAvatarClick }) {
   const [showUploadMenu, setShowUploadMenu] = useState(false)
   const [showFullRanking, setShowFullRanking] = useState(false)
   const [dismissedTags, setDismissedTags] = useState([])
+  const [selectedGoalPath, setSelectedGoalPath] = useState(null)
+  const [pathCoach, setPathCoach] = useState('')
+  const [isPathCoachLoading, setIsPathCoachLoading] = useState(false)
   const [customGoals, setCustomGoals] = useState([])
   const [customDraft, setCustomDraft] = useState({
     type: 'Subir ticket promedio',
@@ -529,38 +579,20 @@ export default function MiMeta({ onAvatarClick }) {
     setShowUploadMenu(false)
   }
 
-  async function openGoalPath(selectedGoal) {
+  function openGoalPath(selectedGoal) {
     const goalTitle = selectedGoal.title || selectedGoal.tipo || 'Meta de crecimiento'
     const steps = buildGoalPath(selectedGoal, profile)
-    setSelectedGoalPath({ ...selectedGoal, title: goalTitle, steps })
-    setPathCoach('El agente esta preparando tu siguiente movimiento.')
-    setIsPathCoachLoading(true)
-
-    try {
-      const response = await fetch('/api/agent', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: `Dame un mensaje corto para guiarme en la meta "${goalTitle}". Enfocate en el siguiente paso: "${steps.find((step) => step.status === 'active')?.label}".`,
-          history: [],
-          customerProfile: localStorage.getItem('tuali_customer_profile') || import.meta.env.VITE_CUSTOMER_PROFILE || DEFAULT_PROFILE_FILE,
-          metaState: {
-            screen: 'Mi Meta',
-            selectedGoal: goalTitle,
-            nextStep: steps.find((step) => step.status === 'active'),
-            cluster: profile.perfil,
-          },
-          includeAudio: false,
-        }),
-      })
-      const data = await response.json()
-      if (!response.ok) throw new Error(data.error || 'Agent unavailable')
-      setPathCoach(data.reply)
-    } catch {
-      setPathCoach(`Empieza por "${steps.find((step) => step.status === 'active')?.label}". Tuali te acompana con una accion pequena y medible para avanzar hoy.`)
-    } finally {
-      setIsPathCoachLoading(false)
-    }
+    const meta = getGoalMeta(selectedGoal)
+    
+    setSelectedGoalPath({ 
+      ...selectedGoal, 
+      title: goalTitle, 
+      steps,
+      impactValue: selectedGoal.impactValue || (goalTitle.includes('ticket') ? '+12% ticket' : '+15% venta')
+    })
+    
+    // Simulate AI coaching message without hard dependency on external API
+    setPathCoach(`Para alcanzar "${goalTitle}", el agente Tuali recomienda enfocarte en: "${steps.find(s => s.status === 'active')?.label || steps[0].label}". ¡Vamos por esos puntos!`)
   }
 
   return (
@@ -895,6 +927,48 @@ export default function MiMeta({ onAvatarClick }) {
           <button onClick={() => setShowFullRanking(true)}>Ver reto del cluster</button>
         </div>
       </section>
+
+      {selectedGoalPath && (
+        <div className="goal-map-overlay" role="dialog" aria-modal="true">
+          <div className="goal-map-shell">
+            <div className="goal-map-topbar">
+              <div>
+                <span>Mapa de Meta</span>
+                <strong>{selectedGoalPath.title}</strong>
+              </div>
+              <button onClick={() => setSelectedGoalPath(null)}>X</button>
+            </div>
+
+            <div className="goal-map-banner">
+              <span>Impacto estimado</span>
+              <strong>{selectedGoalPath.impactValue || '+12% ticket'}</strong>
+            </div>
+
+            <div className="goal-map-coach">
+              <span>IA</span>
+              <p>{pathCoach}</p>
+            </div>
+
+            <div className="goal-map-road">
+              {(selectedGoalPath.steps || []).map((step, idx) => (
+                <div className={`goal-map-node ${step.status}`} key={idx}>
+                  <div className="goal-map-dot">
+                    <span>{idx + 1}</span>
+                  </div>
+                  <div className="goal-map-card">
+                    <small>{step.reward}</small>
+                    <h3>{step.label}</h3>
+                    <p>{step.detail}</p>
+                    {step.status === 'active' && (
+                      <button onClick={() => setSelectedGoalPath(null)}>Completar paso</button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {showFullRanking && (
         <div className="tiktok-feed-overlay upload-overlay" role="dialog" aria-modal="true" aria-label="Ranking completo">
