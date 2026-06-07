@@ -1,5 +1,13 @@
 import { useMemo, useState } from 'react'
 import HelloAvatar from '../components/HelloAvatar.jsx'
+import pedidoIcon from '../../assets/pedido.png'
+import comboIcon from '../../assets/combo.png'
+import metaIcon from '../../assets/meta.png'
+import socialIcon from '../../assets/social.png'
+import sieteDiasIcon from '../../assets/7 dias.png'
+import promoIcon from '../../assets/promo.png'
+import surtidoIcon from '../../assets/surtido.png'
+import topIcon from '../../assets/top.png'
 import vipProfile from '../../agente-tuali/Casos Principales/1_0012Eplus18.json'
 import nicheProfile from '../../agente-tuali/Casos Principales/1_00004Eplus18.json'
 import recurrentProfile from '../../agente-tuali/Casos Principales/3_87064Eplus17.json'
@@ -396,14 +404,14 @@ function buildGoalPlan(profile) {
 
 function buildAchievements({ acceptedCount, customGoalsCount, completedSocialCount, profile }) {
   return [
-    { id: 'first-order', label: 'Pedido', icon: 'P1', color: '#ff7a3d', unlocked: acceptedCount >= 1 },
-    { id: 'combo', label: 'Combo', icon: '+', color: '#7ac943', unlocked: acceptedCount >= 1 },
-    { id: 'goal', label: 'Meta', icon: 'G', color: '#b965f2', unlocked: customGoalsCount > 0 },
-    { id: 'social', label: 'Social', icon: 'T', color: '#ff4b4b', unlocked: completedSocialCount > 0 },
-    { id: 'seven', label: '7 dias', icon: '7', color: '#34a7e8', unlocked: true },
-    { id: 'promo', label: 'Promo', icon: '%', color: '#83c441', unlocked: acceptedCount >= 2 },
-    { id: 'surtido', label: 'Surtido', icon: '4X', color: '#7b61ff', unlocked: profile.perfil === 'Nicho' || acceptedCount >= 2 },
-    { id: 'top', label: 'Top', icon: '#1', color: '#ff6542', unlocked: acceptedCount >= 3 },
+    { id: 'first-order', label: 'Pedido', image: pedidoIcon, color: '#ff7a3d', unlocked: acceptedCount >= 1 },
+    { id: 'combo', label: 'Combo', image: comboIcon, color: '#7ac943', unlocked: acceptedCount >= 1 },
+    { id: 'goal', label: 'Meta', image: metaIcon, color: '#b965f2', unlocked: customGoalsCount > 0 },
+    { id: 'social', label: 'Social', image: socialIcon, color: '#ff4b4b', unlocked: completedSocialCount > 0 },
+    { id: 'seven', label: '7 dias', image: sieteDiasIcon, color: '#34a7e8', unlocked: true },
+    { id: 'promo', label: 'Promo', image: promoIcon, color: '#83c441', unlocked: acceptedCount >= 2 },
+    { id: 'surtido', label: 'Surtido', image: surtidoIcon, color: '#7b61ff', unlocked: profile.perfil === 'Nicho' || acceptedCount >= 2 },
+    { id: 'top', label: 'Top', image: topIcon, color: '#ff6542', unlocked: acceptedCount >= 3 },
   ]
 }
 
@@ -889,7 +897,7 @@ export default function MiMeta({ onAvatarClick }) {
               style={{ '--badge-color': achievement.color }}
             >
               <div className="badge-shield">
-                <span>{achievement.icon}</span>
+                <img src={achievement.image} alt={achievement.label} />
               </div>
               <small>{achievement.label}</small>
             </div>
