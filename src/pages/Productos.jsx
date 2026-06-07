@@ -1,26 +1,31 @@
 import HelloAvatar from "../components/HelloAvatar.jsx";
 import monster from "../../images/monster.png";
 import valle from "../../images/valle.png";
+import refrescos from "../../assets/refrescos.png";
+import agua from "../../assets/agua.png";
+import bebidasFrutales from "../../assets/bebidas-frutales.jpg";
+import deportivas from "../../assets/deportivas.jpg";
+import bebidasElectrolitos from "../../assets/bebidas-con-electrolitos.jpg";
+import lacteos from "../../assets/lacteos.jpg";
+import soya from "../../assets/soya.jpg";
+import cafe from "../../assets/cafe.jpg";
 
 export default function Productos({ onAvatarClick }) {
   const categorias = [
-    { emoji: "\u{1F964}", label: "Refrescos", type: "emoji" },
-    { emoji: "\u{1F4A7}", label: "Agua", type: "emoji" },
-    { emoji: "\u{1F379}", label: "Bebidas de fruta", type: "emoji" },
-    { emoji: "\u{1F3B7}", label: "Deportivas", type: "emoji" },
+    { image: refrescos, label: "Refrescos" },
+    { image: agua, label: "Agua" },
+    { image: bebidasFrutales, label: "Bebidas de fruta" },
+    { image: deportivas, label: "Deportivas" },
     { emoji: "\u{1F6D2}", label: "Abarrotes comestibles", type: "circle" },
     { emoji: "\u{1F961}", label: "Abarrotes no comestibles", type: "circle" },
-    { emoji: "\u26A1", label: "Bebidas con electrolitos", type: "emoji" },
-    { image: valle, label: "Jugos y néctares", className: 'valle-img' },
-    { emoji: "\u{1F373}", label: "Lácteos", type: "emoji" },
-    { emoji: "\u{1F36C}", label: "Dulces y botanas", type: "emoji" },
-    { image: monster, label: "Energeticos", className: 'monster-img' },
-    { emoji: "\u{1F37C}", label: "Bebidas de soya", type: "emoji" },
-    { emoji: "\u{1F373}", label: "Café", type: "emoji" },
+    { image: bebidasElectrolitos, label: "Bebidas con electrolitos" },
+    { image: valle, label: "Jugos y néctares", className: "valle-img" },
+    { image: lacteos, label: "Lácteos" },
+    { image: monster, label: "Energeticos", className: "monster-img" },
+    { image: soya, label: "Bebidas de soya" },
+    { image: cafe, label: "Café" },
     { emoji: "\u{1F36C}", label: "Otros", type: "emoji" },
   ];
-  console.log(monster);
-  console.log(valle);
 
   return (
     <div className="panel-pad">

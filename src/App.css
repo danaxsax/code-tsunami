@@ -529,15 +529,16 @@ body {
 
 
 .cat-image {
+  width: auto;
+  height: 50px;
+  max-width: 100%;
   object-fit: contain;
 }
 
 .valle-img {
-  width: 70%;
-  height: 70%;
+  height: 56px;
 }
 
 .monster-img {
-  width: 45%;
-  height: 45%;
+  height: 45px;
 }
