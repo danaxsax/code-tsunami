@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 import Lottie from 'lottie-react'
 import celebrateAnimation from '../../assets/celebrate.json'
-import HelloAvatar from '../components/HelloAvatar.jsx'
 import { getRandomPhrase } from '../../phrases.js'
 import { speak } from '../services/tts.js'
 import { detectCountry } from '../services/location.js'
@@ -18,7 +17,6 @@ export default function Gana({ onAvatarClick }) {
 
   return (
     <div className="panel-pad">
-      <HelloAvatar onClick={onAvatarClick} />
       <div className="points-card">
         <span className="gana-logo">gana</span>
         <div className="mis">Mis Puntos</div>
