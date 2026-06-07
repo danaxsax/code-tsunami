@@ -1,0 +1,51 @@
+{
+  "customer_id": "2.04326E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 10.66,
+    "score_nicho": 0.16666666666666666
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Sardinas Real en Salsa Tinapa Tomate Lata 156 Gr.                                                                                                                                                                                                         ",
+        "share_producto_top": "16.7%",
+        "categorias_actuales": 6
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Sardinas Real en Salsa Tinapa Tomate Lata 156 Gr.                                                                                                                                                                                                         "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Sardinas Real en Salsa Tinapa Tomate Lata 156 Gr.                                                                                                                                                                                                         ",
+          "Yogurt Chiqui Mix Frutilla con Hojuelas 92 Gr.                                                                                                                                                                                                            "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

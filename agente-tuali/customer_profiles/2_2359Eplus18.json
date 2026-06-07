@@ -1,0 +1,51 @@
+{
+  "customer_id": "2.2359E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 3,
+    "ticket_promedio": 190.65666666666667,
+    "score_nicho": 0.13636363636363635
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Del Valle Durazno",
+        "share_producto_top": "13.6%",
+        "categorias_actuales": 16
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 3,
+        "target_frecuencia": 4
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Del Valle Durazno"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Del Valle Durazno",
+          "Coca - Cola"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

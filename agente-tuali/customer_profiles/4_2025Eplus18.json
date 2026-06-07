@@ -1,0 +1,51 @@
+{
+  "customer_id": "4.2025E+18",
+  "perfil": "Nicho",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 43.28,
+    "score_nicho": 0.75
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Coca-Cola Sabor Original",
+        "share_producto_top": "75.0%",
+        "categorias_actuales": 2
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Coca-Cola Sabor Original"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Coca-Cola Sabor Original",
+          "Powerade Manzana Clear"
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

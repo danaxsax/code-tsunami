@@ -1,0 +1,51 @@
+{
+  "customer_id": "4.32342E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 39.32,
+    "score_nicho": 0.16666666666666666
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Caffe Lato Capuccino Vidrio 285 Ml.                                                                                                                                                                                                                       ",
+        "share_producto_top": "16.7%",
+        "categorias_actuales": 6
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Caffe Lato Capuccino Vidrio 285 Ml.                                                                                                                                                                                                                       "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Caffe Lato Capuccino Vidrio 285 Ml.                                                                                                                                                                                                                       ",
+          "Bebida de Yogurt Frush Frutos Rojos 900 Gr.                                                                                                                                                                                                               "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

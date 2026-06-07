@@ -1,0 +1,51 @@
+{
+  "customer_id": "3.56132E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 157.97,
+    "score_nicho": 0.1
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Leche Saborizada Canela 1Lt.                                                                                                                                                                                                                              ",
+        "share_producto_top": "10.0%",
+        "categorias_actuales": 10
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Leche Saborizada Canela 1Lt.                                                                                                                                                                                                                              "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Leche Saborizada Canela 1Lt.                                                                                                                                                                                                                              ",
+          "Leche Saborizada Toni Chocolate Tpk 750 Ml.                                                                                                                                                                                                               "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

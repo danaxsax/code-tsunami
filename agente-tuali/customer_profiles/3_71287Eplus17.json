@@ -1,0 +1,51 @@
+{
+  "customer_id": "3.71287E+17",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 0.0,
+    "score_nicho": 0.2857142857142857
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Ciel 0% Azúcar Jamaica",
+        "share_producto_top": "28.6%",
+        "categorias_actuales": 4
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Ciel 0% Azúcar Jamaica"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Ciel 0% Azúcar Jamaica",
+          "Ciel 0% Azúcar Limón"
+        ]
+      }
+    }
+  ],
+  "pais": "Argentina"
+}

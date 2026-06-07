@@ -1,0 +1,51 @@
+{
+  "customer_id": "1.39825E+18",
+  "perfil": "VIP",
+  "metricas_base": {
+    "frecuencia": 2,
+    "ticket_promedio": 3149.725,
+    "score_nicho": 0.10714285714285714
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Del Valle Durazno",
+        "share_producto_top": "10.7%",
+        "categorias_actuales": 35
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 2,
+        "target_frecuencia": 3
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Baja",
+        "top_sku_para_promo": "Del Valle Durazno"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Del Valle Durazno",
+          "Coca-Cola Sabor Original"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

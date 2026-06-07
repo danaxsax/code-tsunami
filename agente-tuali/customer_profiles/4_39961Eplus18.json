@@ -1,0 +1,51 @@
+{
+  "customer_id": "4.39961E+18",
+  "perfil": "VIP",
+  "metricas_base": {
+    "frecuencia": 3,
+    "ticket_promedio": 2967.0,
+    "score_nicho": 0.4383561643835616
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Coca - Cola",
+        "share_producto_top": "43.8%",
+        "categorias_actuales": 21
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 3,
+        "target_frecuencia": 4
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Baja",
+        "top_sku_para_promo": "Coca - Cola"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Coca - Cola",
+          "Familia Coca - Cola"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

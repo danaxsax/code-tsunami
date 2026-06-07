@@ -1,0 +1,51 @@
+{
+  "customer_id": "2.07209E+17",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 881.99,
+    "score_nicho": 0.3333333333333333
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Sopa Instantanea Maruchan Camaron Con Limon Y Habanero 64 Gr Vaso / 12 Pzas Caja",
+        "share_producto_top": "33.3%",
+        "categorias_actuales": 3
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Sopa Instantanea Maruchan Camaron Con Limon Y Habanero 64 Gr Vaso / 12 Pzas Caja"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Sopa Instantanea Maruchan Camaron Con Limon Y Habanero 64 Gr Vaso / 12 Pzas Caja",
+          "WWY ORBIT POLAR MINT DW 1/24/40/4P"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

@@ -1,0 +1,51 @@
+{
+  "customer_id": "1.42447E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 2,
+    "ticket_promedio": 166.75,
+    "score_nicho": 0.04878048780487805
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Yogurt Mix Frutilla con Bolitas 180 Gr.                                                                                                                                                                                                                   ",
+        "share_producto_top": "4.9%",
+        "categorias_actuales": 22
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 2,
+        "target_frecuencia": 3
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Yogurt Mix Frutilla con Bolitas 180 Gr.                                                                                                                                                                                                                   "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Yogurt Mix Frutilla con Bolitas 180 Gr.                                                                                                                                                                                                                   ",
+          "Yogurt Mix Vainilla con Bolitas 180 Gr.                                                                                                                                                                                                                   "
+        ]
+      }
+    }
+  ],
+  "pais": "Argentina"
+}

@@ -1,0 +1,51 @@
+{
+  "customer_id": "2.87474E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 28.24,
+    "score_nicho": 0.16666666666666666
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Fideo Lonchys Pollo Picante Vaso 63 Gr.                                                                                                                                                                                                                   ",
+        "share_producto_top": "16.7%",
+        "categorias_actuales": 6
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Fideo Lonchys Pollo Picante Vaso 63 Gr.                                                                                                                                                                                                                   "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Fideo Lonchys Pollo Picante Vaso 63 Gr.                                                                                                                                                                                                                   ",
+          "Fideo Lonchys Pollo Vaso 63 Gr.                                                                                                                                                                                                                           "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

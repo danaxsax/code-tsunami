@@ -1,0 +1,51 @@
+{
+  "customer_id": "3.11624E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 21.19,
+    "score_nicho": 0.09523809523809523
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Telefonía Móvil Claro Tarjeta Paquete $1.05                                                                                                                                                                                                               ",
+        "share_producto_top": "9.5%",
+        "categorias_actuales": 18
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Telefonía Móvil Claro Tarjeta Paquete $1.05                                                                                                                                                                                                               "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Telefonía Móvil Claro Tarjeta Paquete $1.05                                                                                                                                                                                                               ",
+          "Topo Chico Agua Mineral"
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

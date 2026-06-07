@@ -1,0 +1,51 @@
+{
+  "customer_id": "2.06876E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 21.92,
+    "score_nicho": 0.08333333333333333
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Galleta Mini Oreo Funda 40 Gr.                                                                                                                                                                                                                            ",
+        "share_producto_top": "8.3%",
+        "categorias_actuales": 12
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Galleta Mini Oreo Funda 40 Gr.                                                                                                                                                                                                                            "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Galleta Mini Oreo Funda 40 Gr.                                                                                                                                                                                                                            ",
+          "Yogurt Chiqui Mix Frutilla con Bolitas 92 Gr.                                                                                                                                                                                                             "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

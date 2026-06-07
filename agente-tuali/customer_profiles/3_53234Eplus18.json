@@ -1,0 +1,51 @@
+{
+  "customer_id": "3.53234E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 28.05,
+    "score_nicho": 0.14285714285714285
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Dasani Sin Gas",
+        "share_producto_top": "14.3%",
+        "categorias_actuales": 7
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Dasani Sin Gas"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Dasani Sin Gas",
+          "Promo: 6 Leche Saborizada Chocolate 200Ml. Gratis 2 Leche Saborizada Frutilla                                                                                                                                                                             "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

@@ -1,0 +1,51 @@
+{
+  "customer_id": "4.83975E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 2,
+    "ticket_promedio": 336.505,
+    "score_nicho": 0.08333333333333333
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Frijoles Isadora Refritos Bayos 400 Gr / Bolsa",
+        "share_producto_top": "8.3%",
+        "categorias_actuales": 12
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 2,
+        "target_frecuencia": 3
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Frijoles Isadora Refritos Bayos 400 Gr / Bolsa"
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Frijoles Isadora Refritos Bayos 400 Gr / Bolsa",
+          "DOWNY FLORAL 730 ML PET 1"
+        ]
+      }
+    }
+  ],
+  "pais": "México"
+}

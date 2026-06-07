@@ -1,0 +1,51 @@
+{
+  "customer_id": "3.14662E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 350.69,
+    "score_nicho": 0.041666666666666664
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Avena Toni Tradicional Leche Canela 1L                                                                                                                                                                                                                    ",
+        "share_producto_top": "4.2%",
+        "categorias_actuales": 24
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Avena Toni Tradicional Leche Canela 1L                                                                                                                                                                                                                    "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Avena Toni Tradicional Leche Canela 1L                                                                                                                                                                                                                    ",
+          "Caffe Lato Doble Espresso Vidrio 285 Ml.                                                                                                                                                                                                                  "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

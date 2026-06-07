@@ -1,0 +1,51 @@
+{
+  "customer_id": "4.75464E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 12.7,
+    "score_nicho": 0.1
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Tortolines Chifles Picante 45 Gr.                                                                                                                                                                                                                         ",
+        "share_producto_top": "10.0%",
+        "categorias_actuales": 10
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Tortolines Chifles Picante 45 Gr.                                                                                                                                                                                                                         "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Tortolines Chifles Picante 45 Gr.                                                                                                                                                                                                                         ",
+          "Tortolines Chifles Clásicos 45 Gr.                                                                                                                                                                                                                        "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}

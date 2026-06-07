@@ -1,0 +1,51 @@
+{
+  "customer_id": "1.11915E+18",
+  "perfil": "Recurrente",
+  "metricas_base": {
+    "frecuencia": 1,
+    "ticket_promedio": 10.44,
+    "score_nicho": 0.14285714285714285
+  },
+  "metas": [
+    {
+      "tipo": "Aumentar promedio de ticket",
+      "prioridad": "Alta"
+    },
+    {
+      "tipo": "Diversificación",
+      "prioridad": "Alta",
+      "datos_asociados": {
+        "sku_concentracion": "Promo 20%: 6 Toni Mix Hojuelas Frutilla 180Gr. + Yogurt Bebible (1 Mango+ 1 Guanábana) 190Gr                                                                                                                                                              ",
+        "share_producto_top": "14.3%",
+        "categorias_actuales": 7
+      }
+    },
+    {
+      "tipo": "Incrementar Pedidos",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "frecuencia_actual": 1,
+        "target_frecuencia": 2
+      }
+    },
+    {
+      "tipo": "Aplicar Promociones",
+      "prioridad": "Media",
+      "datos_asociados": {
+        "sensibilidad_precio": "Alta",
+        "top_sku_para_promo": "Promo 20%: 6 Toni Mix Hojuelas Frutilla 180Gr. + Yogurt Bebible (1 Mango+ 1 Guanábana) 190Gr                                                                                                                                                              "
+      }
+    },
+    {
+      "tipo": "Crear Combos",
+      "prioridad": "Baja",
+      "datos_asociados": {
+        "productos_frecuentes": [
+          "Promo 20%: 6 Toni Mix Hojuelas Frutilla 180Gr. + Yogurt Bebible (1 Mango+ 1 Guanábana) 190Gr                                                                                                                                                              ",
+          "Leche Saborizada Toni Chocolate Poma 200 Ml.                                                                                                                                                                                                              "
+        ]
+      }
+    }
+  ],
+  "pais": "Ecuador"
+}
